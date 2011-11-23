@@ -149,7 +149,7 @@
             <?php } ?>
             </div>
 			<a id="logo" href="http://gismo.sourceforge.net" target="_blank"><img src="images/logo.png" /></a>
-        </div>
+        </div><br clear="all" />
         <div id="content">
 			<?php
 				// content and footer
