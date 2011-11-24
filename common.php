@@ -26,7 +26,7 @@
     
     // client side: please note that '.js' extension will be automatically added   
     $client_side_libraries = array("gismo"          => array("gismo", "top_menu", "left_menu", "time_line", "gismo_util"),
-                                   "third_parties"  => array("jquery/jquery-1.4.4.min",
+                                   "third_parties"  => array("jquery/jquery-1.7.1.min",
                                                              "jquery-ui-1.8.6/js/jquery-ui-1.8.6.custom.min",
                                                              "jqplot.0.9.7/jquery.jqplot.min",
                                                              "jqplot.0.9.7/plugins/jqplot.barRenderer.min",

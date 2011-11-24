@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link rel="stylesheet" href="style/gismo.css" type="text/css" media="screen" charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="lib/third_parties/client_side/jqplot.0.9.7/jquery.jqplot.min.css" />
-        <script type="text/javascript" src="lib/third_parties/client_side/jquery/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" src="lib/third_parties/client_side/jquery/jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="lib/third_parties/client_side/jquery-ui-1.8.6/js/jquery-ui-1.8.6.custom.min.js"></script>
         <script type="text/javascript" src="lib/third_parties/client_side/jqplot.0.9.7/jquery.jqplot.min.js"></script>
         <script type="text/javascript" src="lib/third_parties/client_side/jqplot.0.9.7/plugins/jqplot.barRenderer.min.js"></script>
