@@ -5,7 +5,7 @@ class GISMOdata_manager {
     const run_sup = "04:00:00";
     const hours_from_last_run = 12;
     const devel_mode = false;
-    const limit_records = 20000;
+    const limit_records = 200000;
     
     // fields
     protected $now_time;
@@ -27,9 +27,11 @@ class GISMOdata_manager {
     public function sync_data() {
         global $CFG;
         // Adjust some php variables to the execution of this script
-        @ini_set("max_execution_time","7200");
+        if ($this->manual !== true) {
+            @ini_set("max_execution_time","7200");
+        }
         if (function_exists("raise_memory_limit")) {
-            raise_memory_limit("192M");
+            raise_memory_limit("1024M");
         }
         // DEBUG: MEMORY USAGE
         if (self::devel_mode) {
@@ -78,179 +80,174 @@ class GISMOdata_manager {
              * SYNC DATA
              */
        
-            // extract courses
-            $courses = get_courses("all", "c.id", "c.id");
-            
-            // DEBUG: MEMORY USAGE
-            if (self::devel_mode) { 
-                echo "<br>MEMORY USAGE (AFTER COURSES EXTRACTION): " . number_format(memory_get_usage(), 0, ".", "'");
+            // set the filter (get newer data only)
+            $filter = $p . "log.id > " . intval($last_export_max_log_id->value) . " AND " . $p . "log.id <= " . $max_log_id;
+            if (!empty($CFG->loglifetime)) {    // !!! REMEBER: 0 is considered empty
+                $filter = $filter . " AND " . $p . "log.time >= " . ($this->now_time - ($CFG->loglifetime * 86400));
             }
-            
-            if (!(is_array($courses) AND count($courses) > 0)) {
-                return $this->return_error("There isn't any course at the moment.", __FILE__, __FUNCTION__, __LINE__);  
-            } else {
-                // set the filter (get newer data only)
-                $filter = " AND " . $p . "log.id > " . intval($last_export_max_log_id->value) . " AND " . $p . "log.id <= " . $max_log_id;
-                if (!empty($CFG->loglifetime)) {    // !!! REMEBER: 0 is considered empty
-                    $filter = $filter . " AND " . $p . "log.time >= " . ($this->now_time - ($CFG->loglifetime * 86400));   
+
+            /*
+             * SYNC gismo_student_login table (GISMO Students Actions)
+             */
+            $offset = 0;
+            $loop = true;
+
+            $qry = "SELECT id, DATE( FROM_UNIXTIME( time ) ) AS date_val, time, COUNT( id ) AS count, userid, course ".
+                    " FROM " . $p . "log WHERE $filter GROUP BY course, userid, date_val ".
+                    " ORDER BY course, userid, date_val LIMIT %u OFFSET %u";
+
+            // loop
+            while ($loop === true) {
+                $logins = get_records_sql(sprintf($qry, self::limit_records, $offset));
+
+                // DEBUG: MEMORY USAGE
+                if (self::devel_mode) {
+                    echo "<br>MEMORY USAGE (MIDDLE GISMO STUDENTS LOGIN): " . number_format(memory_get_usage(), 0, ".", "'");
                 }
-                
-                // sync data for each course
-                foreach ($courses as $course) {
-                    /*
-                     * SYNC gismo_student_login table (GISMO Students Actions)
-                     */                
-                    
-                    $offset = 0;
-                    $loop = true;
-                    
-                    // retrieve users actions 
-                    $qry = "SELECT ".$p."log.id, DATE(FROM_UNIXTIME(time)) AS date_val, time, COUNT(id) AS count, userid FROM " . $p . 
-                           "log WHERE course = ". $course->id . " $filter GROUP BY userid, date_val LIMIT %u OFFSET %u";
-                    
-                    // loop
-                    while ($loop === true) {
-                        $logins = get_records_sql(sprintf($qry, self::limit_records, $offset));
-                        
-                        // DEBUG: MEMORY USAGE
-                        if (self::devel_mode) { 
-                            echo "<br>MEMORY USAGE (MIDDLE GISMO STUDENTS LOGIN): " . number_format(memory_get_usage(), 0, ".", "'");
-                        }
-                        
-                        // add entries
-                        if (is_array($logins) AND count($logins) > 0) {
-                            foreach($logins as $key => $login) {
-                                $gsll_entry = new stdClass();
-                                $gsll_entry->course_log = $course->id;
-                                $gsll_entry->userid_log = $login->userid;
-                                $gsll_entry->count_log = $login->count;
-                                $gsll_entry->date_log = $login->date_val;
-                                $gsll_entry->time_log = $login->time;
-                                if (insert_record("gismo_student_login", $gsll_entry, true, "id_log") === FALSE) {
-                                    return $this->return_error("Cannot add entry in gismo_student_login table.", __FILE__, __FUNCTION__, __LINE__);
-                                }
-                                unset($gsll_entry, $logins[$key]);                        
-                            }
-                            unset($logins);
-                        } else {
-                            $loop = false;
-                        }
-                        
-                        // increment offset
-                        $offset += self::limit_records;
+
+                // add entries
+                if (is_array($logins) AND count($logins) > 0) {
+                    if (count($logins) < self::limit_records) {
+                        $loop = false;
                     }
-                    
-                    // DEBUG: MEMORY USAGE
-                    if (self::devel_mode) { 
-                        echo "<br>MEMORY USAGE (AFTER GISMO STUDENTS LOGIN): " . number_format(memory_get_usage(), 0, ".", "'");
-                    }
-                    
-                    /*
-                     * SYNC gismo_res_access table (GISMO Resources Access Overview)
-                     */
-                   
-                    $offset = 0;
-                    $loop = true;
-                   
-                    // retrieve accesses on resources
-                    $qry = "SELECT ".$p."log.id, DATE(FROM_UNIXTIME(".$p."log.time)) AS date_val, " . $p . "log.time AS time_rac, ".$p."log.userid AS userid, ".
-                             $p."course_modules.instance AS res_id, COUNT(".$p."course_modules.instance) AS count FROM ".$p."log, ".
-                             $p."course_modules WHERE ".$p."course_modules.id = ".$p."log.cmid AND ".
-                             $p."log.course = ".$course->id." AND ".$p."log.action = 'view' AND ".
-                             $p."log.module = 'resource' $filter GROUP BY res_id, date_val, userid LIMIT %u OFFSET %u";
-                    
-                    // loop
-                    while ($loop === true) {
-                        $actions = get_records_sql(sprintf($qry, self::limit_records, $offset));        
-                        
-                        // DEBUG: MEMORY USAGE
-                        if (self::devel_mode) { 
-                            echo "<br>MEMORY USAGE (MIDDLE ACCESSES ON RESOURCES): " . number_format(memory_get_usage(), 0, ".", "'");
+                    foreach($logins as $key => $login) {
+                        $gsll_entry = new stdClass();
+                        $gsll_entry->course_log = $login->course;
+                        $gsll_entry->userid_log = $login->userid;
+                        $gsll_entry->count_log = $login->count;
+                        $gsll_entry->date_log = $login->date_val;
+                        $gsll_entry->time_log = $login->time;
+                        if (insert_record("gismo_student_login", $gsll_entry, true, "id_log") === FALSE) {
+                            return $this->return_error("Cannot add entry in gismo_student_login table.", __FILE__, __FUNCTION__, __LINE__);
                         }
-                        
-                        // add entries
-                        if (is_array($actions) AND count($actions) > 0) {
-                            foreach($actions as $key => $action) {
-                                $gra_entry = new stdClass();
-                                $gra_entry->course_rac = $course->id;
-                                $gra_entry->idresource_rac = $action->res_id;
-                                $gra_entry->userid_rac = $action->userid;
-                                $gra_entry->date_rac = $action->date_val;
-                                $gra_entry->time_rac = $action->time_rac;
-                                $gra_entry->count_rac = $action->count;
-                                if (insert_record("gismo_res_access", $gra_entry, true, "id_rac") === FALSE) {
-                                    return $this->return_error("Cannot add entry in gismo_res_access table.", __FILE__, __FUNCTION__, __LINE__);
-                                }
-                                unset($gra_entry, $actions[$key]);        
-                            }
-                            unset($actions);
-                        } else {
-                            $loop = false;
-                        }
-                        
-                        // increment offset
-                        $offset += self::limit_records;
+                        unset($gsll_entry, $logins[$key]);
                     }
-                    
-                    // DEBUG: MEMORY USAGE
-                    if (self::devel_mode) { 
-                        echo "<br>MEMORY USAGE (AFTER ACCESSES ON RESOURCES): " . number_format(memory_get_usage(), 0, ".", "'");
-                    }
-                    
-                    /*
-                     * SYNC gismo_student_res_access table (GISMO Students Access On Resources)
-                     */
-                    
-                    $offset = 0;
-                    $loop = true;
-                    
-                    // retrieve users accesses on resources, keep trace of resource id (COUNT MUST BE DONE IN JS)
-                    $qry = "SELECT ".$p."log.id, DATE(FROM_UNIXTIME(".$p."log.time)) AS date_val, ".$p."log.time AS time_sra, COUNT(".$p.
-                           "log.userid) AS count, ".$p."log.userid AS userid, ".$p.
-                           "course_modules.instance AS resid FROM ".$p."log, ".$p."course_modules WHERE ".$p.
-                           "course_modules.id = ".$p."log.cmid AND ".$p."log.course = " . $course->id . " AND ".$p.
-                           "log.action = 'view' AND ".$p."log.module = 'resource' $filter GROUP BY userid, date_val, resid LIMIT %u OFFSET %u";
-                    
-                    // loop
-                    while ($loop === true) {
-                        $resource_access = get_records_sql(sprintf($qry, self::limit_records, $offset));
-                        
-                        // DEBUG: MEMORY USAGE
-                        if (self::devel_mode) { 
-                            echo "<br>MEMORY USAGE (MIDDLE STUDENTS RES ACCESS): " . number_format(memory_get_usage(), 0, ".", "'");
-                        }
-                        
-                        // add entries
-                        if (is_array($resource_access) AND count($resource_access) > 0) {
-                            foreach($resource_access as $key => $res_acc) {
-                                $gsra_entry = new stdClass();
-                                $gsra_entry->userid_sra = $res_acc->userid;
-                                $gsra_entry->resid_sra = $res_acc->resid;
-                                $gsra_entry->course_sra = $course->id;
-                                $gsra_entry->count_sra = $res_acc->count;
-                                $gsra_entry->date_sra = $res_acc->date_val;
-                                $gsra_entry->time_sra = $res_acc->time_sra;
-                                if (insert_record("gismo_student_res_access", $gsra_entry, true, "id_sra") === FALSE) {
-                                    return $this->return_error("Cannot add entry in gismo_student_res_access table.", __FILE__, __FUNCTION__, __LINE__);
-                                }
-                                unset($gsra_entry, $resource_access[$key]);          
-                            }
-                            unset($resource_access);
-                        } else {
-                            $loop = false;
-                        }
-                        
-                        // increment offset
-                        $offset += self::limit_records;
-                    }
-                    
-                    // DEBUG: MEMORY USAGE
-                    if (self::devel_mode) { 
-                        echo "<br>MEMORY USAGE (AFTER STUDENTS RES ACCESS): " . number_format(memory_get_usage(), 0, ".", "'");
-                        echo "<br>----------<br>";
-                    }
-                }    
+                    unset($logins);
+                } else {
+                    $loop = false;
+                }
+
+                // increment offset
+                $offset += self::limit_records;
             }
+
+            // DEBUG: MEMORY USAGE
+            if (self::devel_mode) {
+                echo "<br>MEMORY USAGE (AFTER GISMO STUDENTS LOGIN): " . number_format(memory_get_usage(), 0, ".", "'");
+            }
+
+            /*
+             * SYNC gismo_res_access table (GISMO Resources Access Overview)
+             */
+
+            $offset = 0;
+            $loop = true;
+
+            // retrieve accesses on resources
+            $qry = "SELECT ".$p."log.id, DATE(FROM_UNIXTIME(".$p."log.time)) AS date_val, " . $p . "log.time AS time_rac, ".
+                     $p."log.course AS course, ".$p."log.userid AS userid, ".
+                     $p."course_modules.instance AS res_id, COUNT(".$p."course_modules.instance) AS count FROM ".$p."log, ".
+                     $p."course_modules WHERE ".$p."course_modules.id = ".$p."log.cmid AND ".$p."log.action = 'view' AND ".
+                     $p."log.module = 'resource' AND $filter GROUP BY course, res_id, date_val, userid LIMIT %u OFFSET %u";
+
+            // loop
+            while ($loop === true) {
+                $actions = get_records_sql(sprintf($qry, self::limit_records, $offset));
+
+                // DEBUG: MEMORY USAGE
+                if (self::devel_mode) {
+                    echo "<br>MEMORY USAGE (MIDDLE ACCESSES ON RESOURCES): " . number_format(memory_get_usage(), 0, ".", "'");
+                }
+
+                // add entries
+                if (is_array($actions) AND count($actions) > 0) {
+                    if (count($actions) < self::limit_records) {
+                        $loop = false;
+                    }
+                    foreach($actions as $key => $action) {
+                        $gra_entry = new stdClass();
+                        $gra_entry->course_rac = $action->course;
+                        $gra_entry->idresource_rac = $action->res_id;
+                        $gra_entry->userid_rac = $action->userid;
+                        $gra_entry->date_rac = $action->date_val;
+                        $gra_entry->time_rac = $action->time_rac;
+                        $gra_entry->count_rac = $action->count;
+                        if (insert_record("gismo_res_access", $gra_entry, true, "id_rac") === FALSE) {
+                            return $this->return_error("Cannot add entry in gismo_res_access table.", __FILE__, __FUNCTION__, __LINE__);
+                        }
+                        unset($gra_entry, $actions[$key]);
+                    }
+                    unset($actions);
+                } else {
+                    $loop = false;
+                }
+
+                // increment offset
+                $offset += self::limit_records;
+            }
+
+            // DEBUG: MEMORY USAGE
+            if (self::devel_mode) {
+                echo "<br>MEMORY USAGE (AFTER ACCESSES ON RESOURCES): " . number_format(memory_get_usage(), 0, ".", "'");
+            }
+
+            /*
+             * SYNC gismo_student_res_access table (GISMO Students Access On Resources)
+             */
+
+            $offset = 0;
+            $loop = true;
+
+            // retrieve users accesses on resources, keep trace of resource id (COUNT MUST BE DONE IN JS)
+            $qry = "SELECT ".$p."log.id, DATE(FROM_UNIXTIME(".$p."log.time)) AS date_val, ".$p."log.time AS time_sra, COUNT(".$p.
+                   "log.userid) AS count, ".$p."log.course AS course, ".$p."log.userid AS userid, ".$p.
+                   "course_modules.instance AS resid FROM ".$p."log, ".$p."course_modules WHERE ".$p.
+                   "course_modules.id = ".$p."log.cmid AND ".$p.
+                   "log.action = 'view' AND ".$p."log.module = 'resource' AND $filter GROUP BY course, userid, date_val, resid LIMIT %u OFFSET %u";
+
+            // loop
+            while ($loop === true) {
+                $resource_access = get_records_sql(sprintf($qry, self::limit_records, $offset));
+
+                // DEBUG: MEMORY USAGE
+                if (self::devel_mode) {
+                    echo "<br>MEMORY USAGE (MIDDLE STUDENTS RES ACCESS): " . number_format(memory_get_usage(), 0, ".", "'");
+                }
+
+                // add entries
+                if (is_array($resource_access) AND count($resource_access) > 0) {
+                    if (count($resource_access) < self::limit_records) {
+                        $loop = false;
+                    }
+                    foreach($resource_access as $key => $res_acc) {
+                        $gsra_entry = new stdClass();
+                        $gsra_entry->userid_sra = $res_acc->userid;
+                        $gsra_entry->resid_sra = $res_acc->resid;
+                        $gsra_entry->course_sra = $res_acc->course;
+                        $gsra_entry->count_sra = $res_acc->count;
+                        $gsra_entry->date_sra = $res_acc->date_val;
+                        $gsra_entry->time_sra = $res_acc->time_sra;
+                        if (insert_record("gismo_student_res_access", $gsra_entry, true, "id_sra") === FALSE) {
+                            return $this->return_error("Cannot add entry in gismo_student_res_access table.", __FILE__, __FUNCTION__, __LINE__);
+                        }
+                        unset($gsra_entry, $resource_access[$key]);
+                    }
+                    unset($resource_access);
+                } else {
+                    $loop = false;
+                }
+
+                // increment offset
+                $offset += self::limit_records;
+            }
+
+            // DEBUG: MEMORY USAGE
+            if (self::devel_mode) {
+                echo "<br>MEMORY USAGE (AFTER STUDENTS RES ACCESS): " . number_format(memory_get_usage(), 0, ".", "'");
+                echo "<br>----------<br>";
+            }
+                //}
+            //}
             
             // update export time value and max log id
             $last_export_time->value = $this->now_time;
