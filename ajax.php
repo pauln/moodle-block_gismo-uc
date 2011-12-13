@@ -90,13 +90,16 @@
             }
             break;
         case "student-resources-access":
+        case "student-books-access":
+            $type = explode("-", $query);
+            $type = substr($type[1], 0, -1); // get singular version of resource type
             $subtype = (isset($_REQUEST["subtype"])) ? $_REQUEST["subtype"] : "";
             switch ($subtype) {
                 case "users-details":
                     // check student id
                     if (isset($_REQUEST["id"])) {
                         // chart title
-                        $result->name = "Students: student details on resources <a href='javascript:void(0);' onclick='javascript:g.analyse(\"student-resources-access\");'><img src=\"images/back.png\" alt=\"Close details\" title=\"Close details\" /></a>";
+                        $result->name = "Students: student details on {$type}s <a href='javascript:void(0);' onclick='javascript:g.analyse(\"student-{$type}s-access\");'><img src=\"images/back.png\" alt=\"Close details\" title=\"Close details\" /></a>";
                         // get data
                         $student_resource_access = get_records_select("gismo_student_res_access", sprintf("course_sra = %u AND time_sra %s AND userid_sra = %u", $course_id, $time_filter, intval($_REQUEST["id"])), "time_sra ASC");
                         // build result 
@@ -133,7 +136,7 @@
                     break;
                 default:
                     // chart title
-                    $result->name = get_string("student_resources_overview_chart_title", "block_gismo");
+                    $result->name = get_string("student_{$type}s_overview_chart_title", "block_gismo");
                     // get data
                     $student_resource_access = get_records_select("gismo_student_res_access", sprintf("course_sra = %u AND time_sra %s AND userid_sra IN(%s)", $course_id, $time_filter, $users_ids_qry), "time_sra ASC");
                     // build result 
@@ -144,34 +147,41 @@
             }
             break;
         case "resources-students-overview":
+        case "books-students-overview":
+            $type = substr(array_shift(explode("-", $query)), 0, -1); // get singular version of resource type
             // chart title
-            $result->name = get_string("resources_students_overview_chart_title", "block_gismo");
+            $result->name = get_string("{$type}s_students_overview_chart_title", "block_gismo");
             // chart data
+            $mod_id = get_field('modules', 'id', 'name', $type);
             $resource_accesses = get_records_select("gismo_res_access", sprintf("course_rac = %u AND time_rac %s AND userid_rac IN(%s)", $course_id, $time_filter, $users_ids_qry), "time_rac ASC");
             // extra info (get max value)
-            $query = "SELECT id_rac, SUM(count_rac) AS count FROM " . $CFG->prefix . "gismo_res_access WHERE course_rac = " . intval($course_id) .
-                     " GROUP BY userid_rac, idresource_rac ORDER BY count DESC LIMIT 1 OFFSET 0"; 
-                     // TODO add course_start & course_end filters 
+            $query = "SELECT id_rac, SUM(count_rac) AS count FROM " . $CFG->prefix . "gismo_res_access gra INNER JOIN " . $CFG->prefix . "course_modules cm ON gra.idresource_rac=cm.id".
+                     " WHERE course_rac = " . intval($course_id) . " AND module = " . intval($mod_id) .
+                     " GROUP BY userid_rac, idresource_rac ORDER BY count DESC LIMIT 1 OFFSET 0";
+                     // TODO add course_start & course_end filters
             $ei = get_records_sql($query);
             $extra_info = new stdClass();
             $extra_info->max_value = 100;   // TODO: error management
             if ($ei !== false AND is_array($ei) AND count($ei) > 0) {
-                $extra_info->max_value = array_pop($ei)->count;        
+                $extra_info->max_value = array_pop($ei)->count;
             }
             // result
             if ($resource_accesses !== false) {
                 $result->extra_info = $extra_info;
-                $result->data = $resource_accesses;    
+                $result->data = $resource_accesses;
             }
-            break;        
+            break;
         case "resources-access":
+        case "books-access":
+            $type = substr(array_shift(explode("-", $query)), 0, -1); // get singular version of resource type
             $subtype = (isset($_REQUEST["subtype"])) ? $_REQUEST["subtype"] : "";
             switch ($subtype) {
-                case "resources-details":
+                case "{$type}s-details":
                     // check resource id
                     if (isset($_REQUEST["id"])) {
                         // chart title
-                        $result->name = "Resources: Resource details on students <a href='javascript:void(0);' onclick='javascript:g.analyse(\"resources-access\");'><img src=\"images/back.png\" alt=\"Close details\" title=\"Close details\" /></a>";
+                        $type_uc = ucfirst($type);
+                        $result->name = "{$type_uc}s: $type_uc details on students <a href='javascript:void(0);' onclick='javascript:g.analyse(\"{$type}s-access\");'><img src=\"images/back.png\" alt=\"Close details\" title=\"Close details\" /></a>";
                         // chart data
                         $resource_accesses = get_records_select("gismo_res_access", sprintf("course_rac = %u AND time_rac %s AND idresource_rac = %u", $course_id, $time_filter, intval($_REQUEST["id"])), "time_rac ASC");
                         // result
@@ -208,7 +218,7 @@
                     break;
                 default:
                     // chart title
-                    $result->name = get_string("resources_access_overview_chart_title", "block_gismo");
+                    $result->name = get_string("{$type}s_access_overview_chart_title", "block_gismo");
                     // chart data
                     $resource_accesses = get_records_select("gismo_res_access", sprintf("course_rac = %u AND time_rac %s AND userid_rac IN(%s)", $course_id, $time_filter, $users_ids_qry), "time_rac ASC");
                     // result

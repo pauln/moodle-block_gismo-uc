@@ -2,7 +2,7 @@
 class block_gismo extends block_list {
 	function init() {
 		$this->title = get_string ( 'block_title', 'block_gismo' );
-		$this->version = 2010110300;
+		$this->version = 2011121400;
 		$this->content_type = BLOCK_TYPE_LIST;
         $this->cron = 900;
 	}

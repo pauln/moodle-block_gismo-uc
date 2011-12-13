@@ -18,17 +18,23 @@
     $string['student_accesses'] = 'Accesses by students';
     $string['student_accesses_chart_title'] = 'Students: accesses by students';
     $string['student_accesses_overview'] = 'Accesses overview'; 
-    $string['student_accesses_overview_chart_title'] = 'Students: accesses overview'; 
+    $string['student_accesses_overview_chart_title'] = 'Students: accesses overview';
 	$string['student_resources_overview'] = 'Accesses overview on resources';
     $string['student_resources_overview_chart_title'] = 'Students: accesses overview on resources';
+	$string['student_books_overview'] = 'Accesses overview on books';
+    $string['student_books_overview_chart_title'] = 'Students: accesses overview on books';
     
     // Resources
     $string['resources'] = 'Resources';
     $string['detail_resources'] = 'Details on resources';
-    $string['resources_students_overview'] = 'Students overview';
+    $string['resources_students_overview'] = 'Resources - Students overview';
     $string['resources_students_overview_chart_title'] = 'Resources: students overview';
-    $string['resources_access_overview'] = 'Accesses overview';
+    $string['resources_access_overview'] = 'Resources - Accesses overview';
     $string['resources_access_overview_chart_title'] = 'Resources: accesses overview';
+    $string['books_students_overview'] = 'Books - Students overview';
+    $string['books_students_overview_chart_title'] = 'Books: students overview';
+    $string['books_access_overview'] = 'Books - Accesses overview';
+    $string['books_access_overview_chart_title'] = 'Books: accesses overview';
 
 	// Activities
 	$string['activities'] = 'Activities';

@@ -47,6 +47,7 @@
             static_data['users'] = <?php echo $gismo_static_data->users; ?>;
             static_data['quizzes'] = <?php echo $gismo_static_data->quizzes; ?>;
             static_data['resources'] = <?php echo $gismo_static_data->resources; ?>;
+            static_data['books'] = <?php echo $gismo_static_data->books; ?>;
             static_data['assignments'] = <?php echo $gismo_static_data->assignments; ?>;
             static_data['course_full_name'] = '<?php echo str_replace("'", "\\'", $gismo_static_data->fullname); ?>';
             var course_start_time = <?php echo $gismo_static_data->start_time; ?>;
@@ -101,21 +102,36 @@
                                 <a href="javascript:g.analyse('student-accesses-overview')"><div><nobr><?php echo get_string('student_accesses_overview', 'block_gismo'); ?></nobr></div></a>
                             </li>
                             <?php if ($gismo_static_data->resources !== "[]") { ?>
-                            <li>
-								<a href="javascript:g.analyse('student-resources-access')"><div><nobr><?php echo get_string('student_resources_overview', 'block_gismo'); ?></nobr></div></a>
-							</li>
+                                <li>
+                                        <a href="javascript:g.analyse('student-resources-access')"><div><nobr><?php echo get_string('student_resources_overview', 'block_gismo'); ?></nobr></div></a>
+                                </li>
+                            <?php } ?>
+                            <?php if ($gismo_static_data->books !== "[]") { ?>
+                                <li>
+                                        <a href="javascript:g.analyse('student-books-access')"><div><nobr><?php echo get_string('student_books_overview', 'block_gismo'); ?></nobr></div></a>
+                                </li>
                             <?php } ?>
 						</ul>				
 					</li>
-					<?php if ($gismo_static_data->resources !== "[]") { ?>
+					<?php if ($gismo_static_data->resources !== "[]" || $gismo_static_data->books !== "[]") { ?>
                     <li><a href="javascript:void(0)"><?php echo get_string('resources', 'block_gismo'); ?>&nbsp;&nbsp;<img src="images/menu_icon.gif" alt="" /></a>
 						<ul>
-                            <li>
-                                <a href="javascript:g.analyse('resources-students-overview');"><div><nobr><?php echo get_string('resources_students_overview', 'block_gismo'); ?></nobr></div></a>
-                            </li>
+                                                    <?php if ($gismo_static_data->resources !== "[]") { ?>
+                                                        <li>
+                                                            <a href="javascript:g.analyse('resources-students-overview');"><div><nobr><?php echo get_string('resources_students_overview', 'block_gismo'); ?></nobr></div></a>
+                                                        </li>
 							<li>
 								<a href="javascript:g.analyse('resources-access');"><div><nobr><?php echo get_string('resources_access_overview', 'block_gismo'); ?></nobr></div></a>
 							</li>
+                                                    <?php } ?>
+                                                    <?php if ($gismo_static_data->books !== "[]") { ?>
+                                                        <li>
+                                                            <a href="javascript:g.analyse('books-students-overview');"><div><nobr><?php echo get_string('books_students_overview', 'block_gismo'); ?></nobr></div></a>
+                                                        </li>
+							<li>
+								<a href="javascript:g.analyse('books-access');"><div><nobr><?php echo get_string('books_access_overview', 'block_gismo'); ?></nobr></div></a>
+							</li>
+                                                    <?php } ?>
 						</ul>				
 					</li>
                     <?php } ?>
