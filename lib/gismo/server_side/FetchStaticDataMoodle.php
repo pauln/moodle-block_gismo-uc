@@ -25,6 +25,7 @@ class FetchStaticDataMoodle {
     protected $quizzes;
     protected $resources;
     protected $books;
+    protected $forums;
 
     // constructor
     public function __construct($id) {
@@ -45,8 +46,9 @@ class FetchStaticDataMoodle {
         $check &= $this->FetchAssignments();
         $check &= $this->FetchUsers();
         $check &= $this->FetchQuizzes();
-        $check &= $this->FetchResources();
-        $check &= $this->FetchBooks();
+        $check &= $this->FetchResources('resource');
+        $check &= $this->FetchResources('book');
+        $check &= $this->FetchResources('forum');
         // start date / time
         $check &= $this->FetchStartDateAndTime();
         // return result
@@ -153,12 +155,13 @@ class FetchStaticDataMoodle {
     }
 
     // fetch resources
-    protected function FetchResources() {
+    protected function FetchResources($type) {
         // default variables
         $check = false;
-        $this->resources = "[]";
+        $type_plural = $type."s";
+        $this->$type_plural = "[]";
         // fetch resources
-        $resources = get_all_instances_in_course("resource", $this->course, null, true);
+        $resources = get_all_instances_in_course($type, $this->course, null, true);
         //$resources = get_records("resource", "course", $this->id, "name");
         // save data
         $json_resources = array();
@@ -173,34 +176,7 @@ class FetchStaticDataMoodle {
             }
         }
         if (sizeof($json_resources) > 0) {
-            $this->resources = json_encode($json_resources);
-        }
-        // return result
-        return $check;
-    }
-
-    // fetch books
-    protected function FetchBooks() {
-        // default variables
-        $check = false;
-        $this->books = "[]";
-        // fetch resources
-        $books = get_all_instances_in_course("book", $this->course, null, true);
-        //$resources = get_records("resource", "course", $this->id, "name");
-        // save data
-        $json_resources = array();
-        if ($books !== FALSE) {
-            $check = true;
-            if (is_array($books) AND count($books) > 0) {
-                foreach ($books as $book) {
-                    $json_resources[] = array("id" => $book->coursemodule,
-                                              "name" => $book->name,
-                                              "visible" => $book->visible);
-                }
-            }
-        }
-        if (sizeof($json_resources) > 0) {
-            $this->books = json_encode($json_resources);
+            $this->$type_plural = json_encode($json_resources);
         }
         // return result
         return $check;
@@ -264,7 +240,7 @@ class FetchStaticDataMoodle {
 
     public function checkData() {
         if ($this->users !== "[]" AND
-            !($this->resources === "[]" AND $this->books === "[]" AND $this->assignments === "[]" AND $this->quizzes === "[]")) {
+            !($this->resources === "[]" AND $this->books === "[]" AND $this->forums === "[]" AND $this->assignments === "[]" AND $this->quizzes === "[]")) {
             return true;
         } else {
             return false;

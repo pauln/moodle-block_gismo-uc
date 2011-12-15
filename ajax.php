@@ -91,6 +91,7 @@
             break;
         case "student-resources-access":
         case "student-books-access":
+        case "student-forums-access":
             $type = explode("-", $query);
             $type = substr($type[1], 0, -1); // get singular version of resource type
             $subtype = (isset($_REQUEST["subtype"])) ? $_REQUEST["subtype"] : "";
@@ -148,6 +149,7 @@
             break;
         case "resources-students-overview":
         case "books-students-overview":
+        case "forums-students-overview":
             $type = substr(array_shift(explode("-", $query)), 0, -1); // get singular version of resource type
             // chart title
             $result->name = get_string("{$type}s_students_overview_chart_title", "block_gismo");
@@ -173,6 +175,7 @@
             break;
         case "resources-access":
         case "books-access":
+        case "forums-access":
             $type = substr(array_shift(explode("-", $query)), 0, -1); // get singular version of resource type
             $subtype = (isset($_REQUEST["subtype"])) ? $_REQUEST["subtype"] : "";
             switch ($subtype) {

@@ -147,8 +147,9 @@ class GISMOdata_manager {
             $qry = "SELECT ".$p."log.id, DATE(FROM_UNIXTIME(".$p."log.time)) AS date_val, " . $p . "log.time AS time_rac, ".
                      $p."log.course AS course, ".$p."log.userid AS userid, ".
                      $p."course_modules.id AS res_id, COUNT(".$p."course_modules.instance) AS count FROM ".$p."log, ".
-                     $p."course_modules WHERE ".$p."course_modules.id = ".$p."log.cmid AND ".$p."log.action = 'view' AND ".
-                     $p."log.module IN ('resource', 'book') AND $filter GROUP BY course, res_id, date_val, userid LIMIT %u OFFSET %u";
+                     $p."course_modules WHERE ".$p."course_modules.id = ".$p."log.cmid AND ".
+                        "((".$p."log.action = 'view' AND ".$p."log.module IN ('resource', 'book')) OR ".$p."log.action = 'view discussion' AND ".$p."log.module = 'forum') ".
+                        "AND $filter GROUP BY course, res_id, date_val, userid LIMIT %u OFFSET %u";
 
             // loop
             while ($loop === true) {
@@ -202,8 +203,9 @@ class GISMOdata_manager {
             $qry = "SELECT ".$p."log.id, DATE(FROM_UNIXTIME(".$p."log.time)) AS date_val, ".$p."log.time AS time_sra, COUNT(".$p.
                    "log.userid) AS count, ".$p."log.course AS course, ".$p."log.userid AS userid, ".$p.
                    "course_modules.id AS resid FROM ".$p."log, ".$p."course_modules WHERE ".$p.
-                   "course_modules.id = ".$p."log.cmid AND ".$p.
-                   "log.action = 'view' AND ".$p."log.module IN ('resource', 'book') AND $filter GROUP BY course, userid, date_val, resid LIMIT %u OFFSET %u";
+                   "course_modules.id = ".$p."log.cmid AND ".
+                   "((".$p."log.action = 'view' AND ".$p."log.module IN ('resource', 'book')) OR ".$p."log.action = 'view discussion' AND ".$p."log.module = 'forum') ".
+                   "AND $filter GROUP BY course, userid, date_val, resid LIMIT %u OFFSET %u";
 
             // loop
             while ($loop === true) {

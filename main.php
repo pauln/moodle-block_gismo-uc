@@ -48,6 +48,7 @@
             static_data['quizzes'] = <?php echo $gismo_static_data->quizzes; ?>;
             static_data['resources'] = <?php echo $gismo_static_data->resources; ?>;
             static_data['books'] = <?php echo $gismo_static_data->books; ?>;
+            static_data['forums'] = <?php echo $gismo_static_data->forums; ?>;
             static_data['assignments'] = <?php echo $gismo_static_data->assignments; ?>;
             static_data['course_full_name'] = '<?php echo str_replace("'", "\\'", $gismo_static_data->fullname); ?>';
             var course_start_time = <?php echo $gismo_static_data->start_time; ?>;
@@ -111,6 +112,11 @@
                                         <a href="javascript:g.analyse('student-books-access')"><div><nobr><?php echo get_string('student_books_overview', 'block_gismo'); ?></nobr></div></a>
                                 </li>
                             <?php } ?>
+                            <?php if ($gismo_static_data->forums !== "[]") { ?>
+                                <li>
+                                        <a href="javascript:g.analyse('student-forums-access')"><div><nobr><?php echo get_string('student_forums_overview', 'block_gismo'); ?></nobr></div></a>
+                                </li>
+                            <?php } ?>
 						</ul>				
 					</li>
 					<?php if ($gismo_static_data->resources !== "[]" || $gismo_static_data->books !== "[]") { ?>
@@ -135,19 +141,27 @@
 						</ul>				
 					</li>
                     <?php } ?>
-					<?php if (!($gismo_static_data->assignments === "[]" AND $gismo_static_data->quizzes === "[]")) { ?>
+					<?php if (!($gismo_static_data->assignments === "[]" AND $gismo_static_data->quizzes === "[]" AND $gismo_static_data->forums === "[]")) { ?>
                     <li><a href="javascript:void(0)"><?php echo get_string('activities', 'block_gismo'); ?>&nbsp;&nbsp;<img src="images/menu_icon.gif" alt="" /></a>
 						<ul>
-							<?php if ($gismo_static_data->assignments !== "[]") { ?>
-                            <li>
+                                                    <?php if ($gismo_static_data->assignments !== "[]") { ?>
+                                                        <li>
 								<a href="javascript:g.analyse('assignments')"><div><nobr><?php echo get_string('assignments', 'block_gismo'); ?></nobr></div></a>
 							</li>
-                            <?php } ?>
-							<?php if ($gismo_static_data->quizzes !== "[]") { ?>
-                            <li>
+                                                    <?php } ?>
+                                                    <?php if ($gismo_static_data->quizzes !== "[]") { ?>
+                                                        <li>
 								<a href="javascript:g.analyse('quizzes')"><div><nobr><?php echo get_string('quizzes', 'block_gismo'); ?></nobr></div></a>
 							</li>
-                            <?php } ?>							
+                                                    <?php } ?>
+                                                    <?php if ($gismo_static_data->forums !== "[]") { ?>
+                                                        <li>
+                                                            <a href="javascript:g.analyse('forums-students-overview');"><div><nobr><?php echo get_string('forums_students_overview', 'block_gismo'); ?></nobr></div></a>
+                                                        </li>
+							<li>
+								<a href="javascript:g.analyse('forums-access');"><div><nobr><?php echo get_string('forums_access_overview', 'block_gismo'); ?></nobr></div></a>
+							</li>
+                                                    <?php } ?>
 						</ul>
                     </li>
                     <?php } ?>
