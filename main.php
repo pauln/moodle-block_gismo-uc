@@ -1,6 +1,6 @@
 <?php
     // libraries & acl
-	require_once "common.php";
+    require_once "common.php";
     
     // fetch static data
     $gismo_static_data = new FetchStaticDataMoodle($course->id);
@@ -84,19 +84,19 @@
                 <input type="hidden" id="mode" name="mode" />
             </form>
             <div id="menu">
-            	<ul id="panelMenu">
-	            <?php if (in_array($query, array("help"))) { ?>
+                <ul id="panelMenu">
+                <?php if (in_array($query, array("help"))) { ?>
                     <li><a href="?srv_data=<?php echo $srv_data_encoded;?>"><?php echo get_string('close', 'block_gismo'); ?></a></li>    
                 <?php } else { ?>
                     <li><a href="javascript:void(0)"><?php echo get_string('file', 'block_gismo'); ?>&nbsp;&nbsp;<img src="images/menu_icon.gif" alt="" /></a>
-						<ul>
+                        <ul>
                             <li><a href="javascript:g.options();"><div><nobr><?php echo get_string('options', 'block_gismo'); ?></nobr></div></a></li>
                             <li><a href="javascript:g.exit();"><div><nobr><?php echo get_string('exit', 'block_gismo'); ?></nobr></div></a></li>
                         </ul>                        
-					</li>
-					<li><a href="javascript:void(0)"><?php echo get_string('students', 'block_gismo'); ?>&nbsp;&nbsp;<img src="images/menu_icon.gif" alt="" /></a>
-						<ul>
-							 <li>
+                    </li>
+                    <li><a href="javascript:void(0)"><?php echo get_string('students', 'block_gismo'); ?>&nbsp;&nbsp;<img src="images/menu_icon.gif" alt="" /></a>
+                        <ul>
+                             <li>
                                 <a href="javascript:g.analyse('student-accesses')"><div><nobr><?php echo get_string('student_accesses', 'block_gismo'); ?></nobr></div></a>
                             </li>
                             <li>
@@ -104,65 +104,65 @@
                             </li>
                             <?php if ($gismo_static_data->resources !== "[]") { ?>
                                 <li>
-                                        <a href="javascript:g.analyse('student-resources-access')"><div><nobr><?php echo get_string('student_resources_overview', 'block_gismo'); ?></nobr></div></a>
+                                    <a href="javascript:g.analyse('student-resources-access')"><div><nobr><?php echo get_string('student_resources_overview', 'block_gismo'); ?></nobr></div></a>
                                 </li>
                             <?php } ?>
                             <?php if ($gismo_static_data->books !== "[]") { ?>
                                 <li>
-                                        <a href="javascript:g.analyse('student-books-access')"><div><nobr><?php echo get_string('student_books_overview', 'block_gismo'); ?></nobr></div></a>
+                                    <a href="javascript:g.analyse('student-books-access')"><div><nobr><?php echo get_string('student_books_overview', 'block_gismo'); ?></nobr></div></a>
                                 </li>
                             <?php } ?>
                             <?php if ($gismo_static_data->forums !== "[]") { ?>
                                 <li>
-                                        <a href="javascript:g.analyse('student-forums-access')"><div><nobr><?php echo get_string('student_forums_overview', 'block_gismo'); ?></nobr></div></a>
+                                    <a href="javascript:g.analyse('student-forums-access')"><div><nobr><?php echo get_string('student_forums_overview', 'block_gismo'); ?></nobr></div></a>
                                 </li>
                             <?php } ?>
-						</ul>				
-					</li>
-					<?php if ($gismo_static_data->resources !== "[]" || $gismo_static_data->books !== "[]") { ?>
+                        </ul>               
+                    </li>
+                    <?php if ($gismo_static_data->resources !== "[]" || $gismo_static_data->books !== "[]") { ?>
                     <li><a href="javascript:void(0)"><?php echo get_string('resources', 'block_gismo'); ?>&nbsp;&nbsp;<img src="images/menu_icon.gif" alt="" /></a>
-						<ul>
-                                                    <?php if ($gismo_static_data->resources !== "[]") { ?>
-                                                        <li>
-                                                            <a href="javascript:g.analyse('resources-students-overview');"><div><nobr><?php echo get_string('resources_students_overview', 'block_gismo'); ?></nobr></div></a>
-                                                        </li>
-							<li>
-								<a href="javascript:g.analyse('resources-access');"><div><nobr><?php echo get_string('resources_access_overview', 'block_gismo'); ?></nobr></div></a>
-							</li>
-                                                    <?php } ?>
-                                                    <?php if ($gismo_static_data->books !== "[]") { ?>
-                                                        <li>
-                                                            <a href="javascript:g.analyse('books-students-overview');"><div><nobr><?php echo get_string('books_students_overview', 'block_gismo'); ?></nobr></div></a>
-                                                        </li>
-							<li>
-								<a href="javascript:g.analyse('books-access');"><div><nobr><?php echo get_string('books_access_overview', 'block_gismo'); ?></nobr></div></a>
-							</li>
-                                                    <?php } ?>
-						</ul>				
-					</li>
+                        <ul>
+                            <?php if ($gismo_static_data->resources !== "[]") { ?>
+                                <li>
+                                    <a href="javascript:g.analyse('resources-students-overview');"><div><nobr><?php echo get_string('resources_students_overview', 'block_gismo'); ?></nobr></div></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:g.analyse('resources-access');"><div><nobr><?php echo get_string('resources_access_overview', 'block_gismo'); ?></nobr></div></a>
+                                </li>
+                            <?php } ?>
+                            <?php if ($gismo_static_data->books !== "[]") { ?>
+                                <li>
+                                    <a href="javascript:g.analyse('books-students-overview');"><div><nobr><?php echo get_string('books_students_overview', 'block_gismo'); ?></nobr></div></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:g.analyse('books-access');"><div><nobr><?php echo get_string('books_access_overview', 'block_gismo'); ?></nobr></div></a>
+                                </li>
+                            <?php } ?>
+                        </ul>               
+                    </li>
                     <?php } ?>
-					<?php if (!($gismo_static_data->assignments === "[]" AND $gismo_static_data->quizzes === "[]" AND $gismo_static_data->forums === "[]")) { ?>
+                    <?php if (!($gismo_static_data->assignments === "[]" AND $gismo_static_data->quizzes === "[]" AND $gismo_static_data->forums === "[]")) { ?>
                     <li><a href="javascript:void(0)"><?php echo get_string('activities', 'block_gismo'); ?>&nbsp;&nbsp;<img src="images/menu_icon.gif" alt="" /></a>
-						<ul>
-                                                    <?php if ($gismo_static_data->assignments !== "[]") { ?>
-                                                        <li>
-								<a href="javascript:g.analyse('assignments')"><div><nobr><?php echo get_string('assignments', 'block_gismo'); ?></nobr></div></a>
-							</li>
-                                                    <?php } ?>
-                                                    <?php if ($gismo_static_data->quizzes !== "[]") { ?>
-                                                        <li>
-								<a href="javascript:g.analyse('quizzes')"><div><nobr><?php echo get_string('quizzes', 'block_gismo'); ?></nobr></div></a>
-							</li>
-                                                    <?php } ?>
-                                                    <?php if ($gismo_static_data->forums !== "[]") { ?>
-                                                        <li>
-                                                            <a href="javascript:g.analyse('forums-students-overview');"><div><nobr><?php echo get_string('forums_students_overview', 'block_gismo'); ?></nobr></div></a>
-                                                        </li>
-							<li>
-								<a href="javascript:g.analyse('forums-access');"><div><nobr><?php echo get_string('forums_access_overview', 'block_gismo'); ?></nobr></div></a>
-							</li>
-                                                    <?php } ?>
-						</ul>
+                        <ul>
+                            <?php if ($gismo_static_data->assignments !== "[]") { ?>
+                                <li>
+                                    <a href="javascript:g.analyse('assignments')"><div><nobr><?php echo get_string('assignments', 'block_gismo'); ?></nobr></div></a>
+                                </li>
+                            <?php } ?>
+                            <?php if ($gismo_static_data->quizzes !== "[]") { ?>
+                                <li>
+                                    <a href="javascript:g.analyse('quizzes')"><div><nobr><?php echo get_string('quizzes', 'block_gismo'); ?></nobr></div></a>
+                                </li>
+                            <?php } ?>
+                            <?php if ($gismo_static_data->forums !== "[]") { ?>
+                                <li>
+                                    <a href="javascript:g.analyse('forums-students-overview');"><div><nobr><?php echo get_string('forums_students_overview', 'block_gismo'); ?></nobr></div></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:g.analyse('forums-access');"><div><nobr><?php echo get_string('forums_access_overview', 'block_gismo'); ?></nobr></div></a>
+                                </li>
+                            <?php } ?>
+                        </ul>
                     </li>
                     <?php } ?>
                     <li><a href="javascript:void(0)"><?php echo get_string('help', 'block_gismo'); ?>&nbsp;&nbsp;<img src="images/menu_icon.gif" alt="" /></a>
@@ -175,28 +175,28 @@
                             </li>                            
                         </ul>
                     </li>
-				</ul>
+                </ul>
             <?php } ?>
             </div>
-			<a id="logo" href="http://gismo.sourceforge.net" target="_blank"><img src="images/logo.png" /></a>
+            <a id="logo" href="http://gismo.sourceforge.net" target="_blank"><img src="images/logo.png" /></a>
         </div><br clear="all" />
         <div id="content">
-			<?php
-				// content and footer
-				switch ($query) {    
-					case "help":
+            <?php
+                // content and footer
+                switch ($query) {    
+                    case "help":
                         $content = "template/help.php";
                         $footer = false;
                         break;
-					default:
-						$content = "template/home.php";
-						$footer = "template/footer.html";
-					    break;
-				}
-				require_once $content;
-			?>
+                    default:
+                        $content = "template/home.php";
+                        $footer = "template/footer.html";
+                        break;
+                }
+                require_once $content;
+            ?>
         </div>
-		<?php 
+        <?php 
             if($footer) {
                 require_once $footer; 
             } 
@@ -218,5 +218,5 @@
     </script>
     <?php
         }
-    ?>	
+    ?>  
 </html>
