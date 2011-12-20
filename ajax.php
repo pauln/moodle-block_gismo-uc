@@ -92,6 +92,7 @@
         case "student-resources-access":
         case "student-books-access":
         case "student-forums-access":
+        case "student-glossaries-access":
             $type = explode("-", $query);
             $type = substr($type[1], 0, -1); // get singular version of resource type
             $subtype = (isset($_REQUEST["subtype"])) ? $_REQUEST["subtype"] : "";
@@ -150,9 +151,11 @@
         case "resources-students-overview":
         case "books-students-overview":
         case "forums-students-overview":
-            $type = substr(array_shift(explode("-", $query)), 0, -1); // get singular version of resource type
+        case "glossaries-students-overview":
+            $type_plural = array_shift(explode("-", $query));
+            $type = ($type_plural=="glossaries")?"glossary":substr($type_plural, 0, -1); // get singular version of resource type
             // chart title
-            $result->name = get_string("{$type}s_students_overview_chart_title", "block_gismo");
+            $result->name = get_string("{$type_plural}_students_overview_chart_title", "block_gismo");
             // chart data
             $mod_id = get_field('modules', 'id', 'name', $type);
             $resource_accesses = get_records_select("gismo_res_access", sprintf("course_rac = %u AND time_rac %s AND userid_rac IN(%s)", $course_id, $time_filter, $users_ids_qry), "time_rac ASC");
@@ -176,15 +179,18 @@
         case "resources-access":
         case "books-access":
         case "forums-access":
-            $type = substr(array_shift(explode("-", $query)), 0, -1); // get singular version of resource type
+        case "glossaries-access":
+            $type_plural = array_shift(explode("-", $query));
+            $type = ($type_plural=="glossaries")?"glossary":substr($type_plural, 0, -1); // get singular version of resource type
             $subtype = (isset($_REQUEST["subtype"])) ? $_REQUEST["subtype"] : "";
             switch ($subtype) {
-                case "{$type}s-details":
+                case "{$type_plural}-details":
                     // check resource id
                     if (isset($_REQUEST["id"])) {
                         // chart title
                         $type_uc = ucfirst($type);
-                        $result->name = "{$type_uc}s: $type_uc details on students <a href='javascript:void(0);' onclick='javascript:g.analyse(\"{$type}s-access\");'><img src=\"images/back.png\" alt=\"Close details\" title=\"Close details\" /></a>";
+                        $type_uc_plural = ucfirst($type_plural);
+                        $result->name = "{$type_uc_plural}: $type_uc details on students <a href='javascript:void(0);' onclick='javascript:g.analyse(\"{$type_plural}-access\");'><img src=\"images/back.png\" alt=\"Close details\" title=\"Close details\" /></a>";
                         // chart data
                         $resource_accesses = get_records_select("gismo_res_access", sprintf("course_rac = %u AND time_rac %s AND idresource_rac = %u", $course_id, $time_filter, intval($_REQUEST["id"])), "time_rac ASC");
                         // result
@@ -221,7 +227,7 @@
                     break;
                 default:
                     // chart title
-                    $result->name = get_string("{$type}s_access_overview_chart_title", "block_gismo");
+                    $result->name = get_string("{$type_plural}_access_overview_chart_title", "block_gismo");
                     // chart data
                     $resource_accesses = get_records_select("gismo_res_access", sprintf("course_rac = %u AND time_rac %s AND userid_rac IN(%s)", $course_id, $time_filter, $users_ids_qry), "time_rac ASC");
                     // result

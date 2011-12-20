@@ -26,6 +26,7 @@ class FetchStaticDataMoodle {
     protected $resources;
     protected $books;
     protected $forums;
+    protected $glossaries;
 
     // constructor
     public function __construct($id) {
@@ -49,6 +50,7 @@ class FetchStaticDataMoodle {
         $check &= $this->FetchResources('resource');
         $check &= $this->FetchResources('book');
         $check &= $this->FetchResources('forum');
+        $check &= $this->FetchResources('glossary');
         // start date / time
         $check &= $this->FetchStartDateAndTime();
         // return result
@@ -158,7 +160,7 @@ class FetchStaticDataMoodle {
     protected function FetchResources($type) {
         // default variables
         $check = false;
-        $type_plural = $type."s";
+        $type_plural = ($type=='glossary')?"glossaries":($type."s");
         $this->$type_plural = "[]";
         // fetch resources
         $resources = get_all_instances_in_course($type, $this->course, null, true);
@@ -240,7 +242,7 @@ class FetchStaticDataMoodle {
 
     public function checkData() {
         if ($this->users !== "[]" AND
-            !($this->resources === "[]" AND $this->books === "[]" AND $this->forums === "[]" AND $this->assignments === "[]" AND $this->quizzes === "[]")) {
+            !($this->resources === "[]" AND $this->books === "[]" AND $this->forums === "[]" AND $this->glossaries === "[]" AND $this->assignments === "[]" AND $this->quizzes === "[]")) {
             return true;
         } else {
             return false;

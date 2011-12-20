@@ -148,7 +148,7 @@ class GISMOdata_manager {
                      $p."log.course AS course, ".$p."log.userid AS userid, ".
                      $p."course_modules.id AS res_id, COUNT(".$p."course_modules.instance) AS count FROM ".$p."log, ".
                      $p."course_modules WHERE ".$p."course_modules.id = ".$p."log.cmid AND ".
-                        "((".$p."log.action = 'view' AND ".$p."log.module IN ('resource', 'book')) OR ".$p."log.action = 'view discussion' AND ".$p."log.module = 'forum') ".
+                        "((".$p."log.action = 'view' AND ".$p."log.module IN ('resource', 'book', 'glossary')) OR ".$p."log.action = 'view discussion' AND ".$p."log.module = 'forum') ".
                         "AND $filter GROUP BY course, res_id, date_val, userid LIMIT %u OFFSET %u";
 
             // loop
@@ -204,7 +204,7 @@ class GISMOdata_manager {
                    "log.userid) AS count, ".$p."log.course AS course, ".$p."log.userid AS userid, ".$p.
                    "course_modules.id AS resid FROM ".$p."log, ".$p."course_modules WHERE ".$p.
                    "course_modules.id = ".$p."log.cmid AND ".
-                   "((".$p."log.action = 'view' AND ".$p."log.module IN ('resource', 'book')) OR ".$p."log.action = 'view discussion' AND ".$p."log.module = 'forum') ".
+                   "((".$p."log.action = 'view' AND ".$p."log.module IN ('resource', 'book', 'glossary')) OR ".$p."log.action = 'view discussion' AND ".$p."log.module = 'forum') ".
                    "AND $filter GROUP BY course, userid, date_val, resid LIMIT %u OFFSET %u";
 
             // loop

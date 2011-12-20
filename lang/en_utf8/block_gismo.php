@@ -23,8 +23,10 @@
     $string['student_resources_overview_chart_title'] = 'Students: accesses overview on resources';
 	$string['student_books_overview'] = 'Accesses overview on books';
     $string['student_books_overview_chart_title'] = 'Students: accesses overview on books';
-	$string['student_forums_overview'] = 'Accesses overview on forums';
+    $string['student_forums_overview'] = 'Accesses overview on forums';
     $string['student_forums_overview_chart_title'] = 'Students: accesses overview on forums';
+    $string['student_glossaries_overview'] = 'Accesses overview on glossaries';
+    $string['student_glossaries_overview_chart_title'] = 'Students: accesses overview on glossaries';
     
     // Resources
     $string['resources'] = 'Resources';
@@ -41,6 +43,10 @@
     $string['forums_students_overview_chart_title'] = 'Forums: students overview';
     $string['forums_access_overview'] = 'Forums - Accesses overview';
     $string['forums_access_overview_chart_title'] = 'Forums: accesses overview';
+    $string['glossaries_students_overview'] = 'Glossaries - Students overview';
+    $string['glossaries_students_overview_chart_title'] = 'Glossaries: students overview';
+    $string['glossaries_access_overview'] = 'Glossaries - Accesses overview';
+    $string['glossaries_access_overview_chart_title'] = 'Glossaries: accesses overview';
 
 	// Activities
 	$string['activities'] = 'Activities';
