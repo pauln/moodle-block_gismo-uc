@@ -27,6 +27,8 @@
     $string['student_forums_overview_chart_title'] = 'Students: accesses overview on forums';
     $string['student_glossaries_overview'] = 'Accesses overview on glossaries';
     $string['student_glossaries_overview_chart_title'] = 'Students: accesses overview on glossaries';
+    $string['student_wikis_overview'] = 'Accesses overview on wikis';
+    $string['student_wikis_overview_chart_title'] = 'Students: accesses overview on wikis';
     
     // Resources
     $string['resources'] = 'Resources';
@@ -47,6 +49,10 @@
     $string['glossaries_students_overview_chart_title'] = 'Glossaries: students overview';
     $string['glossaries_access_overview'] = 'Glossaries - Accesses overview';
     $string['glossaries_access_overview_chart_title'] = 'Glossaries: accesses overview';
+    $string['wikis_students_overview'] = 'Wikis - Students overview';
+    $string['wikis_students_overview_chart_title'] = 'Wikis: students overview';
+    $string['wikis_access_overview'] = 'Wikis - Accesses overview';
+    $string['wikis_access_overview_chart_title'] = 'Wikis: accesses overview';
 
 	// Activities
 	$string['activities'] = 'Activities';

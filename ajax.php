@@ -93,6 +93,7 @@
         case "student-books-access":
         case "student-forums-access":
         case "student-glossaries-access":
+        case "student-wikis-access":
             $type = explode("-", $query);
             $type = substr($type[1], 0, -1); // get singular version of resource type
             $subtype = (isset($_REQUEST["subtype"])) ? $_REQUEST["subtype"] : "";
@@ -152,6 +153,7 @@
         case "books-students-overview":
         case "forums-students-overview":
         case "glossaries-students-overview":
+        case "wikis-students-overview":
             $type_plural = array_shift(explode("-", $query));
             $type = ($type_plural=="glossaries")?"glossary":substr($type_plural, 0, -1); // get singular version of resource type
             // chart title
@@ -180,6 +182,7 @@
         case "books-access":
         case "forums-access":
         case "glossaries-access":
+        case "wikis-access":
             $type_plural = array_shift(explode("-", $query));
             $type = ($type_plural=="glossaries")?"glossary":substr($type_plural, 0, -1); // get singular version of resource type
             $subtype = (isset($_REQUEST["subtype"])) ? $_REQUEST["subtype"] : "";

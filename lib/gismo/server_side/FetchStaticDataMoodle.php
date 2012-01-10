@@ -27,6 +27,7 @@ class FetchStaticDataMoodle {
     protected $books;
     protected $forums;
     protected $glossaries;
+    protected $wikis;
 
     // constructor
     public function __construct($id) {
@@ -51,6 +52,7 @@ class FetchStaticDataMoodle {
         $check &= $this->FetchResources('book');
         $check &= $this->FetchResources('forum');
         $check &= $this->FetchResources('glossary');
+        $check &= $this->FetchResources('wiki');
         // start date / time
         $check &= $this->FetchStartDateAndTime();
         // return result
@@ -242,7 +244,7 @@ class FetchStaticDataMoodle {
 
     public function checkData() {
         if ($this->users !== "[]" AND
-            !($this->resources === "[]" AND $this->books === "[]" AND $this->forums === "[]" AND $this->glossaries === "[]" AND $this->assignments === "[]" AND $this->quizzes === "[]")) {
+            !($this->resources === "[]" AND $this->books === "[]" AND $this->forums === "[]" AND $this->glossaries === "[]" AND $this->wikis === "[]" AND $this->assignments === "[]" AND $this->quizzes === "[]")) {
             return true;
         } else {
             return false;
