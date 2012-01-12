@@ -53,6 +53,10 @@
     $string['wikis_students_overview_chart_title'] = 'Wikis: students overview';
     $string['wikis_access_overview'] = 'Wikis - Accesses overview';
     $string['wikis_access_overview_chart_title'] = 'Wikis: accesses overview';
+    $string['activitysummary_students_overview'] = 'Summary - Students overview';
+    $string['activitysummary_students_overview_chart_title'] = 'Summary: students overview';
+    $string['activitysummary_access_overview'] = 'Summary - Accesses overview';
+    $string['activitysummary_access_overview_chart_title'] = 'Summary: accesses overview';
 
 	// Activities
 	$string['activities'] = 'Activities';

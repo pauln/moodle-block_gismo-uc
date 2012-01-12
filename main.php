@@ -51,6 +51,9 @@
             static_data['forums'] = <?php echo $gismo_static_data->forums; ?>;
             static_data['glossaries'] = <?php echo $gismo_static_data->glossaries; ?>;
             static_data['wikis'] = <?php echo $gismo_static_data->wikis; ?>;
+            // build summary array by concatenating previous three
+            static_data['activitysummary'] = static_data['forums'].concat(static_data['glossaries']);
+            static_data['activitysummary'].push.apply(static_data['activitysummary'], static_data['wikis']);
             static_data['assignments'] = <?php echo $gismo_static_data->assignments; ?>;
             static_data['course_full_name'] = '<?php echo str_replace("'", "\\'", $gismo_static_data->fullname); ?>';
             var course_start_time = <?php echo $gismo_static_data->start_time; ?>;
@@ -153,7 +156,7 @@
                         </ul>               
                     </li>
                     <?php } ?>
-                    <?php if (!($gismo_static_data->assignments === "[]" AND $gismo_static_data->quizzes === "[]" AND $gismo_static_data->forums === "[]" AND $gismo_static_data->glossaries === "[]" AND $gismo_static_data->wikis === "[]")) { ?>
+                    <?php if (!($gismo_static_data->assignments === "[]" AND $gismo_static_data->quizzes === "[]" AND $gismo_static_data->forums === "[]" AND $gismo_static_data->glossaries === "[]" AND $gismo_static_data->wikis === "[]")) { $activitiesShown=0;?>
                     <li><a href="javascript:void(0)"><?php echo get_string('activities', 'block_gismo'); ?>&nbsp;&nbsp;<img src="images/menu_icon.gif" alt="" /></a>
                         <ul>
                             <?php if ($gismo_static_data->assignments !== "[]") { ?>
@@ -166,7 +169,10 @@
                                     <a href="javascript:g.analyse('quizzes')"><div><nobr><?php echo get_string('quizzes', 'block_gismo'); ?></nobr></div></a>
                                 </li>
                             <?php } ?>
-                            <?php if ($gismo_static_data->forums !== "[]") { ?>
+                            <?php if (($gismo_static_data->assignments !== "[]" OR $gismo_static_data->quizzes !== "[]") AND ($gismo_static_data->forums !== "[]" OR $gismo_static_data->glossaries !== "[]" OR $gismo_static_data->wikis !== "[]")) { ?>
+                                <li style="border-bottom:1px solid #999;margin-bottom:10px;"></li>
+                            <?php } ?>
+                            <?php if ($gismo_static_data->forums !== "[]") { $activitiesShown++;?>
                                 <li>
                                     <a href="javascript:g.analyse('forums-students-overview');"><div><nobr><?php echo get_string('forums_students_overview', 'block_gismo'); ?></nobr></div></a>
                                 </li>
@@ -174,7 +180,7 @@
                                     <a href="javascript:g.analyse('forums-access');"><div><nobr><?php echo get_string('forums_access_overview', 'block_gismo'); ?></nobr></div></a>
                                 </li>
                             <?php } ?>
-                            <?php if ($gismo_static_data->glossaries !== "[]") { ?>
+                            <?php if ($gismo_static_data->glossaries !== "[]") { $activitiesShown++;?>
                                 <li>
                                     <a href="javascript:g.analyse('glossaries-students-overview');"><div><nobr><?php echo get_string('glossaries_students_overview', 'block_gismo'); ?></nobr></div></a>
                                 </li>
@@ -182,12 +188,20 @@
                                     <a href="javascript:g.analyse('glossaries-access');"><div><nobr><?php echo get_string('glossaries_access_overview', 'block_gismo'); ?></nobr></div></a>
                                 </li>
                             <?php } ?>
-                            <?php if ($gismo_static_data->wikis !== "[]") { ?>
+                            <?php if ($gismo_static_data->wikis !== "[]") { $activitiesShown++;?>
                                 <li>
                                     <a href="javascript:g.analyse('wikis-students-overview');"><div><nobr><?php echo get_string('wikis_students_overview', 'block_gismo'); ?></nobr></div></a>
                                 </li>
                                 <li>
                                     <a href="javascript:g.analyse('wikis-access');"><div><nobr><?php echo get_string('wikis_access_overview', 'block_gismo'); ?></nobr></div></a>
+                                </li>
+                            <?php } ?>
+                            <?php if ($activitiesShown > 1) { ?>
+                                <li>
+                                    <a href="javascript:g.analyse('activitysummary-students-overview');"><div><nobr><?php echo get_string('activitysummary_students_overview', 'block_gismo'); ?></nobr></div></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:g.analyse('activitysummary-access');"><div><nobr><?php echo get_string('activitysummary_access_overview', 'block_gismo'); ?></nobr></div></a>
                                 </li>
                             <?php } ?>
                         </ul>

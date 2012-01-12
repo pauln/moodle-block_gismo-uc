@@ -97,7 +97,8 @@ class FetchStaticDataMoodle {
                                                 "timeavailable" => $assignment->timeavailable,
                                                 "gradeOver" => $assignment->grade,
                                                 "timedue" => $assignment->timedue,
-                                                "visible" => $assignment->visible);
+                                                "visible" => $assignment->visible,
+                                                "type" => "assignments");
                 }
                 $this->assignments = json_encode($json_assignments);
             }
@@ -149,7 +150,8 @@ class FetchStaticDataMoodle {
                                             "name" => $quiz->name,
                                             "timeopen_qui" => $quiz->timeopen,
                                             "timeclose_qui" => $quiz->timeclose,
-                                            "visible" => $quiz->visible);
+                                            "visible" => $quiz->visible,
+                                              "type" => "quizzes");
                 }
                 $this->quizzes = json_encode($json_quizzes);
             }
@@ -175,7 +177,8 @@ class FetchStaticDataMoodle {
                 foreach ($resources as $resource) {
                     $json_resources[] = array("id" => $resource->coursemodule,
                                               "name" => $resource->name,
-                                              "visible" => $resource->visible);
+                                              "visible" => $resource->visible,
+                                              "type" => $type_plural);
                 }
             }
         }

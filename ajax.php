@@ -154,16 +154,28 @@
         case "forums-students-overview":
         case "glossaries-students-overview":
         case "wikis-students-overview":
+        case "activitysummary-students-overview":
             $type_plural = array_shift(explode("-", $query));
             $type = ($type_plural=="glossaries")?"glossary":substr($type_plural, 0, -1); // get singular version of resource type
             // chart title
             $result->name = get_string("{$type_plural}_students_overview_chart_title", "block_gismo");
             // chart data
             $mod_id = get_field('modules', 'id', 'name', $type);
+            $comparison = "= ".intval($mod_id);
+            if($type_plural=='activitysummary') {
+                $comparison = "IN(";
+                $mod_id = get_field('modules', 'id', 'name', "forum");
+                $comparison .= intval($mod_id).",";
+                $mod_id = get_field('modules', 'id', 'name', "glossary");
+                $comparison .= intval($mod_id).",";
+                $mod_id = get_field('modules', 'id', 'name', "wiki");
+                $comparison .= intval($mod_id);
+                $comparison .= ")";
+            }
             $resource_accesses = get_records_select("gismo_res_access", sprintf("course_rac = %u AND time_rac %s AND userid_rac IN(%s)", $course_id, $time_filter, $users_ids_qry), "time_rac ASC");
             // extra info (get max value)
             $query = "SELECT id_rac, SUM(count_rac) AS count FROM " . $CFG->prefix . "gismo_res_access gra INNER JOIN " . $CFG->prefix . "course_modules cm ON gra.idresource_rac=cm.id".
-                     " WHERE course_rac = " . intval($course_id) . " AND module = " . intval($mod_id) .
+                     " WHERE course_rac = " . intval($course_id) . " AND module $comparison" .
                      " GROUP BY userid_rac, idresource_rac ORDER BY count DESC LIMIT 1 OFFSET 0";
                      // TODO add course_start & course_end filters
             $ei = get_records_sql($query);
@@ -183,61 +195,63 @@
         case "forums-access":
         case "glossaries-access":
         case "wikis-access":
+        case "activitysummary-access":
             $type_plural = array_shift(explode("-", $query));
             $type = ($type_plural=="glossaries")?"glossary":substr($type_plural, 0, -1); // get singular version of resource type
             $subtype = (isset($_REQUEST["subtype"])) ? $_REQUEST["subtype"] : "";
-            switch ($subtype) {
-                case "{$type_plural}-details":
-                    // check resource id
-                    if (isset($_REQUEST["id"])) {
-                        // chart title
-                        $type_uc = ucfirst($type);
-                        $type_uc_plural = ucfirst($type_plural);
-                        $result->name = "{$type_uc_plural}: $type_uc details on students <a href='javascript:void(0);' onclick='javascript:g.analyse(\"{$type_plural}-access\");'><img src=\"images/back.png\" alt=\"Close details\" title=\"Close details\" /></a>";
-                        // chart data
-                        $resource_accesses = get_records_select("gismo_res_access", sprintf("course_rac = %u AND time_rac %s AND idresource_rac = %u", $course_id, $time_filter, intval($_REQUEST["id"])), "time_rac ASC");
-                        // result
-                        if ($resource_accesses !== false) {
-                            // evaluate start date and end date
-                            // 1. get min date and max date
-                            // 2. from min date to first of the month
-                            //    from max date to last of the month
-                            // 3. evaluate difference in days between the two dates
-                            if (is_array($resource_accesses) AND count($resource_accesses) > 0) {
-                                // 1. min and max date
-                                $keys = array_keys($resource_accesses);
-                                $min_date = $resource_accesses[$keys[0]]->date_rac;
-                                $max_date = $resource_accesses[$keys[count($resource_accesses)-1]]->date_rac;
-                                // adjust values
-                                $mid = explode("-", $min_date);
-                                $mad = explode("-", $max_date);
-                                $min_date = date("Y-m-d", mktime(0, 0 ,0 , $mid[1], 1, $mid[0]));
-                                $min_datetime = date("Y-m-d H:i:s", mktime(0, 0 ,0 , $mid[1], 1, $mid[0]));
-                                $max_date = date("Y-m-d", mktime(0, 0 ,0 , $mad[1] + 1, 0, $mad[0]));
-                                $max_datetime = date("Y-m-d H:i:s", mktime(0, 0 ,0 , $mad[1] + 1, 0, $mad[0]));
-                                // diff
-                                $days = intval(GISMOutil::days_between_dates($max_datetime, $min_datetime));               
-                                // save results
-                                $extra_info = new stdClass();
-                                $extra_info->min_date = $min_date;
-                                $extra_info->max_date = $max_date;
-                                $extra_info->num_days = $days;
-                                $result->extra_info = $extra_info;                    
-                            }
-                            $result->data = $resource_accesses;    
-                        }
-                    }
-                    break;
-                default:
+            if(stripos($subtype, "details")!== false) {
+                // check resource id
+                if (isset($_REQUEST["id"])) {
+                    $orig_plural = $type_plural;
+                    $type_plural = array_shift(explode("-", $subtype));
+                    $type = ($type_plural=="glossaries")?"glossary":substr($type_plural, 0, -1); // get singular 
+                    $type_uc = ucfirst($type);
+                    $type_uc_plural = ucfirst($type_plural);
                     // chart title
-                    $result->name = get_string("{$type_plural}_access_overview_chart_title", "block_gismo");
+                    $result->name = "{$type_uc_plural}: $type_uc details on students <a href='javascript:void(0);' onclick='javascript:g.analyse(\"{$orig_plural}-access\");'><img src=\"images/back.png\" alt=\"Close details\" title=\"Close details\" /></a>";
                     // chart data
-                    $resource_accesses = get_records_select("gismo_res_access", sprintf("course_rac = %u AND time_rac %s AND userid_rac IN(%s)", $course_id, $time_filter, $users_ids_qry), "time_rac ASC");
+                    $resource_accesses = get_records_select("gismo_res_access", sprintf("course_rac = %u AND time_rac %s AND idresource_rac = %u", $course_id, $time_filter, intval($_REQUEST["id"])), "time_rac ASC");
                     // result
                     if ($resource_accesses !== false) {
+                        // evaluate start date and end date
+                        // 1. get min date and max date
+                        // 2. from min date to first of the month
+                        //    from max date to last of the month
+                        // 3. evaluate difference in days between the two dates
+                        if (is_array($resource_accesses) AND count($resource_accesses) > 0) {
+                            // 1. min and max date
+                            $keys = array_keys($resource_accesses);
+                            $min_date = $resource_accesses[$keys[0]]->date_rac;
+                            $max_date = $resource_accesses[$keys[count($resource_accesses)-1]]->date_rac;
+                            // adjust values
+                            $mid = explode("-", $min_date);
+                            $mad = explode("-", $max_date);
+                            $min_date = date("Y-m-d", mktime(0, 0 ,0 , $mid[1], 1, $mid[0]));
+                            $min_datetime = date("Y-m-d H:i:s", mktime(0, 0 ,0 , $mid[1], 1, $mid[0]));
+                            $max_date = date("Y-m-d", mktime(0, 0 ,0 , $mad[1] + 1, 0, $mad[0]));
+                            $max_datetime = date("Y-m-d H:i:s", mktime(0, 0 ,0 , $mad[1] + 1, 0, $mad[0]));
+                            // diff
+                            $days = intval(GISMOutil::days_between_dates($max_datetime, $min_datetime));               
+                            // save results
+                            $extra_info = new stdClass();
+                            $extra_info->min_date = $min_date;
+                            $extra_info->max_date = $max_date;
+                            $extra_info->num_days = $days;
+                            $result->extra_info = $extra_info;                    
+                        }
                         $result->data = $resource_accesses;    
-                    }  
-                    break;
+                    }
+                }
+            } else {
+                // chart title
+                $result->name = get_string("{$type_plural}_access_overview_chart_title", "block_gismo");
+                // chart data
+                $resource_accesses = get_records_select("gismo_res_access", sprintf("course_rac = %u AND time_rac %s AND userid_rac IN(%s)", $course_id, $time_filter, $users_ids_qry), "time_rac ASC");
+                // result
+                if ($resource_accesses !== false) {
+                    $result->data = $resource_accesses;    
+                }  
+                break;
             }
             break;
         case "assignments":
