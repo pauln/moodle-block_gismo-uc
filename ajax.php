@@ -175,7 +175,7 @@
             $resource_accesses = get_records_select("gismo_res_access", sprintf("course_rac = %u AND time_rac %s AND userid_rac IN(%s)", $course_id, $time_filter, $users_ids_qry), "time_rac ASC");
             // extra info (get max value)
             $query = "SELECT id_rac, SUM(count_rac) AS count FROM " . $CFG->prefix . "gismo_res_access gra INNER JOIN " . $CFG->prefix . "course_modules cm ON gra.idresource_rac=cm.id".
-                     " WHERE course_rac = " . intval($course_id) . " AND module $comparison" .
+                     " WHERE course_rac = " . intval($course_id) . " AND module $comparison AND userid_rac IN($users_ids_qry)" .
                      " GROUP BY userid_rac, idresource_rac ORDER BY count DESC LIMIT 1 OFFSET 0";
                      // TODO add course_start & course_end filters
             $ei = get_records_sql($query);
