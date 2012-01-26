@@ -312,7 +312,7 @@
                         $item = array("test_id" => $quiz->test_id,
                                       "test_max_grade" => $quiz->test_max_grade,
                                       "userid" => $quiz->userid,
-                                      "user_grade" => $quiz->user_grade,
+                                      "user_grade" => number_format($quiz->user_grade,1),
                                       "submission_time" => $quiz->submission_time);
                         array_push($result->data, $item);
                     }          
