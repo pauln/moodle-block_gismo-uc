@@ -260,14 +260,17 @@
             // chart data
             $fields = "asub.id AS asub_id, " . // stupid moodle get_records_sql function set array key with the first selected field (use a unique key to avoid data loss)
                       "asub.userid AS userid, " .
-                      "asub.grade AS user_grade, " .
+                      "gg.finalgrade AS user_grade, " . // asub.grade
                       "asub.timemodified AS submission_time, " .
-                      "asub.timemarked AS test_timemarked, " .
+                      "gg.timemodified AS test_timemarked, " .
                       "a.id AS test_id, " . 
                       "a.grade AS test_max_grade";  
-            $qry = "SELECT " . $fields . " FROM " . $CFG->prefix . "assignment AS a INNER JOIN " .
-                   $CFG->prefix . "assignment_submissions AS asub ON a.id = asub.assignment WHERE a.course = " . 
-                   $course_id . " AND asub.timemodified " . $time_filter;
+            $p = $CFG->prefix;
+            $qry = "SELECT " . $fields . " FROM ((mdl_assignment AS a " .
+                        "INNER JOIN {$p}assignment_submissions AS asub ON a.id = asub.assignment) " .
+                            "INNER JOIN (SELECT id, iteminstance FROM {$p}grade_items WHERE itemtype = 'mod' AND itemmodule = 'assignment' AND courseid = $course_id) gi ON a.id = gi.iteminstance) " .
+                                "INNER JOIN {$p}grade_grades gg ON (gg.itemid=gi.id AND gg.userid=asub.userid) " .
+                    "WHERE a.course = $course_id AND asub.timemodified " . $time_filter;
             $assignments = get_records_sql($qry);
             // build result 
             if ($assignments !== false AND 
@@ -278,7 +281,7 @@
                         $item = array("test_id" => $assignment->test_id,
                                       "test_max_grade" => $assignment->test_max_grade,
                                       "userid" => $assignment->userid,
-                                      "user_grade" => $assignment->user_grade,              // -1 if it hasn't been corrected
+                                      "user_grade" => is_null($assignment->user_grade)?-1:number_format($assignment->user_grade,1),              // -1 if it hasn't been corrected
                                       "submission_time" => $assignment->submission_time,
                                       "test_timemarked" => $assignment->test_timemarked);   // 0 if it hasn't been corrected
                         array_push($result->data, $item);
