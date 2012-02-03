@@ -19,10 +19,10 @@ class GISMOutil {
     }
     
     public static function get_default_options() {
-        return (object) array("include_hidden_items" => 1,
+        return (object) array("include_hidden_items" => 0,
                               "matrix_num_series_limit" => 11,
-                              "chart_base_color" => 1,
-                              "include_hidden_items" => 1,
+                              "chart_base_color" => 4,
+                              "include_hidden_items" => 0,
                               "resize_delay" => 1500,
                               "chart_axis_label_max_len" => 20,
                               "chart_axis_label_max_offset" => 5);
