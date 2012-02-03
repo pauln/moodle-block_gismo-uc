@@ -1,16 +1,16 @@
 <?php 
 	$string = array();
-	$string['block_title'] = "Gismo";
+	$string['block_title'] = "LearnTrak";
 	
 	// General
-	$string['page_title'] = "Gismo - ";
+	$string['page_title'] = "LearnTrak - ";
 	$string['file'] = 'File';
 	$string['options'] = 'Options';
 	$string['save'] = 'Save';
     $string['print'] = 'Print';
     $string['exit'] = 'Exit';
 	$string['help'] = 'Help';
-	$string['home'] = 'Gismo home';
+	$string['home'] = 'LearnTrak home';
     $string['close'] = 'Close';
 	
 	// Students
@@ -67,7 +67,7 @@
 	
     // Help
     $string['help_page'] = 'Help';
-    $string['about'] = 'About Gismo';
+    $string['about'] = 'About LearnTrak';
 	
 	$string['date'] = 'Date';
 	$string['from'] = 'From';

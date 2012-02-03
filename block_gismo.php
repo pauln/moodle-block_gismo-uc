@@ -37,7 +37,7 @@ class block_gismo extends block_list {
 		$this->content->footer = '';
         
 		// Gismo
-		$this->content->items [] = ($this->check_data() === true) ? '<a href="../blocks/gismo/main.php?srv_data='.$srv_data_encoded.'" target="_blank">GISMO</a>' : "GISMO (disabled)" . helpbutton("gismo", "Gismo requirements", "block_gismo", true, false, null, true);   // TODO: add help button if disabled
+		$this->content->items [] = ($this->check_data() === true) ? '<a href="../blocks/gismo/main.php?srv_data='.$srv_data_encoded.'" target="_blank">View LearnTrak Data</a>' : "View LearnTrak Data (disabled)" . helpbutton("gismo", "LearnTrak requirements", "block_gismo", true, false, null, true);   // TODO: add help button if disabled
 		$this->content->icons [] = '<img src="../blocks/gismo/images/gismo.gif" class="icon" alt="" />';
 			
 		return $this->content;
