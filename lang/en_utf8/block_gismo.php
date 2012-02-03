@@ -4,7 +4,7 @@
 	
 	// General
 	$string['page_title'] = "LearnTrak - ";
-	$string['file'] = 'File';
+	$string['file'] = 'Options';
 	$string['options'] = 'Options';
 	$string['save'] = 'Save';
     $string['print'] = 'Print';
