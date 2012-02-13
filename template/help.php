@@ -2,177 +2,176 @@
     // libraries & acl
     require_once "common.php";
 ?>
-<div id="inner">
-    <b>What is GISMO?</b>
-    <p>
-        You are the instructor of one or more courses given at distance with the Moodle Course Management System. 
-        Maybe your students are hundreds of kilometers away, or maybe your students are local, but you see them 
-        in classroom only once or twice per semester. As you are the instructor of your course, you may probably 
-        what to know what is happening to your students: Are they reading materials? Are they regularly accessing 
-        the course? Are there quizzes or assignments particularly problematic? Are their submissions performed in 
-        due time?
-        <br>
-        If this is your case, GISMO can help you. GISMO is a graphical interactive student monitoring and tracking 
-        system tool that extracts tracking data from the Moodle Course Management System, and generates useful 
-        graphical representations that can be explored by course instructors to examine various aspects of distance 
-        students.
-    </p>
-    <p>
-        <b>How to get and install the software</b>
-    </p>
-    <p>
-        To install the software you need to ask the administrator of your local Moodle platform to install the block.
-        <br>
-        GISMO application can be downloaded by the Internet at the following address: http://sourceforge.net/projects/gismo/
-        <br>
-        Once your administrator has installed the software, you are ready to use it.
-    </p>
-    <p>
-        <b>Starting the GISMO</b>
-    </p>
-    <p>
-        GISMO appears like any other Moodle's block. You need to turn on the editing modality and add GISMO to your course. This block is visible only to the instructors of the course. Then you can click on the &quot;GISMO&quot; link that appears within the GISMO block to start the application.
-    </p>
-    <p>
-        <b>Graphical representations</b>
-    </p>
-    <p>
-        In this section we describe each graphical representation that can be generated with GISMO. These can be activated by clicking on the menu items. There are 3 main categories of visualizations:
-    </p>
-    <p>
-        <em>&#8729; Students
-            <br>
-            &#8729; Resources
-            <br>
-            &#8729; Activities
-        </em>
-    </p>
-    <p>
-        For each category there is a specific item in the menu bar. We will illustrate each of them in the following sections.
-    </p>
-    <p>
-        <b>Welcome page</b>
-    </p>
-    <p>
-        <img src="images/help/gismo_main.png" width="500" height="330">
-        <br>
-        <em>[Welcome page]</em>
-    </p>
-    <p>
-        The Figure<em> [Welcome page] </em>represents the welcome page of GISMO. As you can see, there are 3 different areas in the user interface:
-    </p>
-    <ul style="list-style-position: inside;">
-        <li>
-            Graph Panel: graphs are drawn on this panel.
+<div id="inner" class="help">
+    <h1>LearnTrak Help</h1>
+    <h2>Contents</h2>
+    <ul class="contents">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#options">Options</a></li>
+        <li><a href="#students-accesses">Students</a>
+            <ul>
+                <li><a href="#students-accesses">Accesses by students</a></li>
+                <li><a href="#students-accesses-overview">Accesses overview</a></li>
+                <li><a href="#students-accesses-overview-resources">Accesses overview of resources, books, forums, glossaries or wikis</a></li>
+                <li><a href="#student-details-resources">Student details on resources, books, forums, glossaries or wikis</a></li>
+            </ul>
         </li>
-        <li>
-            List Panel: contains a list of students, resources, quizzes, and assignments of the monitored course. For each list the instructor can select/deselect data to visualize.
+        <li><a href="#resources-students-overview">Resources</a>
+            <ul>
+                <li><a href="#resources-students-overview">Students overview</a></li>
+                <li><a href="#resources-accesses-overview">Accesses overview of resources and books</a></li>
+                <li><a href="#resources-details-students">Resource details on students</a></li>
+            </ul>
         </li>
-        <li>
-            Time Panel: using this panel the instructor can reduce the selection on time and restrict the graph to a specific range of dates.
+        <li><a href="#activities-assignments-quizzes">Activities</a>
+            <ul>
+                <li><a href="#activities-assignments-quizzes">Assignments/Quizzes overview</a></li>
+                <li><a href="#activities-forums-accesses-overview">Forums, glossaries or wikis student overview</a></li>
+                <li><a href="#activities-forums-student-overview">Forums, glossaries or wikis accesses overview</a></li>
+                <li><a href="#activities-forums-details-students">Forums, glossaries or wikis details on students</a></li>
+                <li><a href="#activities-summary-student-overview">Summary students overview</a></li>
+                <li><a href="#activities-summary-accesses-overview">Summary accesses overview</a></li>
+            </ul>
         </li>
     </ul>
+    
+    <h2 id="overview">Overview &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/overview.png" width="500" height="330">
     <p>
-        <b>Students: Accesses by students</b>
+        There are four areas which make up the LearnTrak user interface:
+    </p>
+    <ul>
+        <li>The dropdown menu navigation bar</li>
+        <li>The List Panel: A list of students, resources, or activities in your Learn course will be shown in this panel. From each list the instructor can select or deselect data to visualize, for items chosen using the tick-boxes.</li>
+        <li>The Graph Panel: Visualisations are shown in this panel.</li>
+        <li>Time Slider: Using this slider the instructor can restrict the graph to display data from a specific range of dates.</li>
+    </ul>
+    <p>
+        By clicking on items from the dropdown menus under the category headings along the menu bar at the top, graphical representations can be viewed with a focus on the student, the resources or the activities within a Learn site.
     </p>
     <p>
-        <img src="images/help/students_accesses_by_students.png" width="500" height="331">
-        <br>
-        <em>[Students:Accesses by students]</em>
+        The list of items viewed can be made more specific by using the tick boxes in the list panel. The dates of the information displayed can be made more specific by using the time slider along the bottom of the screen, which can be moved from either end.
+    </p>
+    <hr class="category" />
+
+    <h2 id="options">Options &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/options.png" width="447" height="375">
+    <p>
+        There are options available which allow you to customise the way you see LearnTrak, such as including items which have been hidden in your course, or changing the colours in which the graphs are displayed.
+    </p>
+    <hr class="category" />
+    
+    <h2 id="students-accesses">Students: Accesses by students &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/students-accesses.png" width="500" height="330">
+    <p>
+        A simple matrix formed by students' names (on  the Y-axis) and the dates of the course (on the X-axis) is used to represent accesses to the course. A mark on the graph represents a particular student accessing the course at least once on a given date. 
+    </p>
+    <hr class="section" />
+    
+    <h2 id="students-accesses-overview">Students: Accesses overview &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/students-accesses-overview.png" width="500" height="330">
+    <p>
+        A histogram showing the total number of accesses to the course made by students on each date.
     </p>
     <p>
-        The Figure <em>[Students:Accesses by students]</em>
-        reports a graph on the students' accesses to the course. A simple matrix formed by students&Otilde; names (on Y-axis) and dates of the course (on X-axis) is used to represent the course accesses. A corresponding mark represents at least one access to the course made by the student on the selected date. 
+        Coupled with the previous graph, this provides an overview of accesses made by students to the course with a clear identification of patterns and trends. You can also find information about the attendance of a specific student by using the tick boxes in the list panel.
+    </p>
+    <hr class="section" />
+    
+    <h2 id="students-accesses-overview-resources">Students: Accesses overview on resources, books, forums, glossaries or wikis &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/students-accesses-overview-resources.png" width="500" height="330">
+    <p>
+        This graph represents the total number of accesses made by students (on the X-axis) to all the resources (using "Link to a file or web site") in the course (Y-axis).
     </p>
     <p>
-        <b>Students: Accesses overview</b>
+        Similar graphs are available for any books, forums, glossaries or wikis which you have in your Learn site. These can be viewed by choosing that item from the "Students" dropdown menu.
     </p>
     <p>
-        <img src="images/help/students_accesses_overview.png" width="500" height="331">
-        <br>
-        <em>[Students:Accesses overview]</em>
+        By clicking on the "eye icon" in the left menu, you can see the details for a specific student. This will be displayed as per the example below.
+    </p>
+    <hr class="section" />
+    
+    <h2 id="student-details-resources">Students: Student details on resources, books, forums, glossaries or wikis &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/student-details-resources.png" width="500" height="330">
+    <p>
+        This graph shows an overview of a particular student's accesses to the course's resources. Dates are represented on the X-axis; resources are represented on the Y-axis.
+    </p>
+    <hr class="category" />
+    
+    <h2 id="resources-students-overview">Resources: Students overview &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/resources-students-overview.png" width="500" height="330">
+    <p>
+        Details of which resources were accessed by each student and when they were accessed are provided in this chart. Student names are shown on the Y-axis, with resource names on the X-axis. A mark is shown if the student has accessed this resource, with the colour of the mark determined by the number of times he/she accessed this resource. The colours range from green to red, or light to dark, depending on the option you have chosen.
+    </p>
+    <hr class="section" />
+    
+    <h2 id="resources-accesses-overview">Resources: Accesses overview of resources and books &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/resources-accesses-overview.png" width="500" height="330">
+    <p>
+        This graph depicts the total number of accesses made by all students to each resource of the course (X-axis). Each bar of the histogram represents a particular resource.
     </p>
     <p>
-        The Figure <em>[Students:Accesses overview]</em>
-        reports a histogram that shows the global number of hits to the course made by students on each date.
+        A similar graph is available for any books which you have in your Learn site. This can be viewed by choosing that item from the "Resources" dropdown menu.
     </p>
     <p>
-        With the previous two graphs, the instructor has an overview, at a glance, of the global accesses made by students to the course with a clear identification of patterns and trends, as well as information about the attendance of a specific student of the course.
+        By clicking on the "eye icon" in the left menu, you can see the details for a specific resource. This will be displayed as in the example below.
+    </p>
+    <hr class="section" />
+    
+    <h2 id="resources-details-students">Resources: Resource details on students &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/resources-details-students.png" width="500" height="330">
+    <p>
+        This chart provides an overview of students' accesses to this particular resource. Dates are shown on the X-axis; students are shown on the Y-axis.
+    </p>
+    <hr class="category" />
+    
+    <h2 id="activities-assignments-quizzes">Activities: Assignments/Quizzes overview &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/activities-assignments-quizzes.png" width="500" height="330">
+    <p>
+        Students' grades on quizzes and assignments are presented in this chart. The Y-axis shows the students, the X-axis shows the assignments (or quizzes in the graphs dedicated to quizzes) in the Learn site, and marks denote students' graded submissions. A mark which only shows an outline depicts a submission which has not been graded, while a coloured square reports the grade: a lower grade is depicted in red (or a light colour), a high grade is depicted in green (or a dark colour). The actual grade can be seen by placing the cursor on the mark.
+    </p>
+    <hr class="section" />
+    
+    <h2 id="activities-forums-accesses-overview">Activities: Forums, glossaries or wikis student overview &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/activities-forums-accesses-overview.png" width="500" height="330">
+    <p>
+        This graph represents the total number of accesses made by students to each forum in the course (X-axis). Each bar of the histogram represents a particular forum in the course.
     </p>
     <p>
-        <b>Students: Accesses overview on resources</b>
+        A similar graph is available for any glossaries or wikis which you have in your Learn site. This can be viewed by choosing that item from the "Activities" dropdown menu.
     </p>
     <p>
-        <img src="images/help/students_accesses_overview_on_resources.png" width="500" height="325">
-        <br>
-        <em>[Students:Accesses overview on resources]</em>
+        By clicking on the "eye icon" in the left menu, you can see the details for a specific forum. This will be displayed as in the example below.
+    </p>
+    <hr class="section" />
+    
+    <h2 id="activities-forums-student-overview">Activities: Forums, glossaries or wikis accesses overview &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/activities-forums-student-overview.png" width="500" height="330">
+    <p>
+        This chart is intended to visually indicate the engagement by students with forums. The Y-axis shows the students, while the X-axis shows the forums in the Learn site. Coloured marks denote the number of times a student has viewed or written posts in a forum: a lower number is depicted in red (or a light colour), a high number is depicted in green (or a dark colour). The actual number can be seen by placing the cursor on the mark. This also shows the maximum activity by a student.
     </p>
     <p>
-        The image in Figure <em>[Students: Accesses overview on resources]</em>
-        represents the global number of accesses made by students (in X-axis) to all the resources of the course (Y-axis).
-        <br />
-        If the user click the &quot;eye icon&quot; in the left menu he can see the details for a specific student. This leads to the following representation. 
+        A similar graph is available for glossaries or wikis which you have in your Learn site. This can be viewed by choosing that item from the "Activities" dropdown menu.
     </p>
+    <hr class="section" />
+    
+    <h2 id="activities-forums-details-students">Activities: Forums, glossaries or wikis details on students &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/activities-forums-details-students.png" width="500" height="330">
     <p>
-        <b>Students: Student details on resources</b>
+        This chart shows an overview of a particular student's accesses to the course's forums. Dates are shown on the X-axis; forums are shown on the Y-axis. 
     </p>
+    <hr class="section" />
+    
+    <h2 id="activities-summary-student-overview">Activities: Summary students overview &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/activities-summary-student-overview.png" width="500" height="330">
     <p>
-        <img src="images/help/student_details_on_resources.png" width="500" height="331">
-        <br>
-        <em>[Students: Student details on resources]</em>
+        All students' engagement with all forums, glossaries and wikis is aggregated into this one chart. The Y-axis shows the students, the X-axis shows all the forums, glossaries and wikis in the Learn site. Coloured marks denote the number of times a student has engaged with a forum, glossary or wiki: a lower number is depicted in red (or a light colour), a high number is depicted in green (or a dark colour). The actual number can be seen by placing the cursor on the mark. This also shows the maximum activity by a student.
     </p>
+    <hr class="section" />
+    
+    <h2 id="activities-summary-accesses-overview">Activities: Summary accesses overview &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/activities-summary-accesses-overview.png" width="500" height="330">
     <p>
-        The Figure <em>[Students: Student details on resources]</em>
-        reports an overview of the accesses of a student on the course's resources. Dates are represented on the X-axis; resources are represented on the Y-axis.
-    </p>
-    <p>
-        <b>Resources: Students overview</b>
-    </p>
-    <p>
-        <img src="images/help/resources_students_overview.png" width="500" height="331">
-        <br>
-        <em>[Resources: Students overview]</em>
-    </p>
-    <p>
-        Instructors could also be interested in having the details on what resources were accessed by all the students and when. A specific representation is intended to provide this information. The Figure <em>[Resources: Students overview]</em>
-        reports student names on the Y-axis, and resource names on the X-axis. A mark is depicted if the student accessed this resource, and the color of the mark ranges from light-red to dark-red according to the number of times he/she accessed this resource.
-    </p>
-    <p>
-        <b>Resources:Accesses overview</b>
-    </p>
-    <p>
-        <img src="images/help/resources_accesses_overview.png" width="500" height="325">
-        <br>
-        <em>[Resource accesses overview]</em>
-    </p>
-    <p>
-        The image in Figure <em>[Resource accesses overview]</em>
-        represents the global number of accesses made by students to each resource of the course (X-axis). Each bar of the histogram represents a particular resource of the course.
-        <br />
-        If the user click the &quot;eye icon&quot; in the left menu he can see the details for a specific resource. This leads to the following representation.
-    </p>
-    <p>
-        <b>Resources: Resource details on students</b>
-    </p>
-    <p>
-        <img src="images/help/resources_resource_details_on_students.png" width="500" height="325">
-        <br>
-        <em>[Resources: Resource details on students]</em>
-    </p>
-    <p>
-        The Figure <em>[Resources: Resource details on students]</em>
-        reports an overview of the accesses of students to this particular resource. Dates are represented on the X-axis; students are represented on the Y-axis.
-    </p>
-    <p>
-        <b>Activities: Assignments/Quizzes overview</b>
-    </p>
-    <p>
-        <img src="images/help/activities_assignments.png" width="500" height="331">
-        <br>
-        <em>[Activities: Assignments overview]</em>
-    </p>
-    <p>
-        The graph in Figure <em>[Activities: Assignments overview]</em>
-        is indented to visually indicate the grades received by students on assignments and quizzes. On the X-axis we mapped the assignments (or quizzes in the graphs dedicated to quizzes) and marks denote students&Otilde; submissions. An empty square means a submission not graded, while a coloured square reports the grade: a lower grade is depicted with a light colour, a high grade is depicted with a dark colour.
+        This histogram shows the total number of accesses to the forums, glossaries and wikis made by students in the Learn site.  Each bar of the histogram represents a particular forum, glossary or wiki within the course.
     </p>
 </div>

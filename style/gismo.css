@@ -331,3 +331,43 @@ img {
 .selected {color: red !important;}
 .image_link { cursor: pointer; border: none; }
 .float_right { float: right; }
+
+/* ---------------------- help ------------------------------- */
+.help {
+    width:800px;
+    margin:0 auto;
+}
+.help h1 {
+    margin-top:0px;
+}
+.help h2 {
+    margin-bottom:5px;
+}
+.help hr {
+    border:1px solid #000;
+}
+.help hr.category {
+    width:95%;
+    margin-top:40px;
+    margin-bottom:40px;
+}
+.help hr.section {
+    width:60%;
+}
+.help h2 a {
+    font-size:60%;
+    font-weight:normal;
+}
+.help a,
+.help a:visited {
+    color:#000;
+}
+.help ul {
+    margin-left:20px;
+}
+.help ul.contents {
+    margin-bottom:25px;
+}
+.help ul.contents, .help ul.contents ul {
+    list-style: none;
+}
