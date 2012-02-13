@@ -264,6 +264,9 @@ img {
 .closed_lm { width: 0px !important; }
 .expanded_ch { margin-left: 0px !important; }
 
+#charts_list td { text-align: left; }
+#charts_list td.home-image { text-align: center; }
+
 /* ---------------------- Footer --------------------------- */
 
 #footer {

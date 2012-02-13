@@ -31,31 +31,20 @@
                 <!-- Chart -->
             </div>
             <div id="welcome_page">
-                <h1 align="center">Welcome to GISMO</h1>
-                <table id="charts_list" cellspacing="0" cellpadding="5" align="center">
+                <h1 align="center">Welcome to LearnTrak</h1>
+                <table id="charts_list" cellspacing="0" cellpadding="5" align="center" width="800">
                     <tr>
-                        <td>Students: accesses by students</td>
-                        <td><img width="200" height="100" src="images/help/students_accesses_by_students_tn.png" /></td>
+                        <td class="home-image"><img width="200" height="100" src="images/home/students-accesses-overview_thumb.png" /></td>
+                        <td>LearnTrak is a graphical interactive student monitoring and tracking system tool that extracts tracking data from this Learn course, and generates useful graphical representations that can be explored by course instructors to examine various aspects of student engagement. The LearnTrak block is only visible to the instructors of the course.</td>
+                        <td class="home-image"><img width="200" height="100" src="images/home/activities-assignments-quizzes_thumb.png" /></td>
                     </tr>
                     <tr>
-                        <td><img width="200" height="100" src="images/help/students_accesses_overview_tn.png" /></td>
-                        <td>Students: accesses overview</td>
+                        <td class="home-image"><img width="200" height="100" src="images/home/students-accesses_thumb.png" /></td>
+                        <td><p style="margin-top:0;">As a teacher in your Learn course you may wonder what use your students are making of the site: Are they regularly accessing the course? Are they viewing or downloading course materials? Are they participating in activities? Are there students who are over-achieving or under-achieving? This is where LearnTrak can help you.</p><p>LearnTrak generates graphical representations of activity within Learn courses. There are three main categories of visualizations: Students, Resources and Activities.</p></td>
+                        <td class="home-image"><img width="200" height="100" src="images/home/resources-access-overview_thumb.png" /></td>
                     </tr>
                     <tr>
-                        <td>Students: accesses overview on resources</td>
-                        <td><img width="200" height="100" src="images/help/students_accesses_overview_on_resources_tn.png" /></td>
-                    </tr>
-                    <tr>
-                        <td><img width="200" height="100" src="images/help/resources_students_overview_tn.png" /></td>
-                        <td>Resources: students overview</td> 
-                    </tr>
-                    <tr>
-                        <td>Resources: accesses overview</td>
-                        <td><img width="200" height="100" src="images/help/resources_accesses_overview_tn.png" /></td>
-                    </tr>
-                    <tr>
-                        <td><img width="200" height="100" src="images/help/activities_assignments_tn.png" /></td>
-                        <td>Activities: assignments overview</td>
+                        <td colspan="3" class="home-image"><img width="200" height="100" src="images/home/resources-students-overview_thumb.png" /></td>
                     </tr>
                 </table>
             </div>           
