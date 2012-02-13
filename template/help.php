@@ -128,7 +128,7 @@
     <h2 id="activities-assignments-quizzes">Activities: Assignments/Quizzes overview &nbsp; <a href="#">[Back to top]</a></h2>
     <img src="images/help/activities-assignments-quizzes.png" width="500" height="330">
     <p>
-        Students' grades on quizzes and assignments are presented in this chart. The Y-axis shows the students, the X-axis shows the assignments (or quizzes in the graphs dedicated to quizzes) in the Learn site, and marks denote students' graded submissions. A mark which only shows an outline depicts a submission which has not been graded, while a coloured square reports the grade: a lower grade is depicted in red (or a light colour), a high grade is depicted in green (or a dark colour). The actual grade can be seen by placing the cursor on the mark.
+        Students' grades on assignments (or quizzes) are presented in this chart. The Y-axis shows the students, the X-axis shows the assignments (or quizzes in the graphs dedicated to quizzes) in the Learn site, and marks denote students' graded submissions. A mark which only shows an outline depicts a submission which has not been graded, while a coloured square reports the grade: a lower grade is depicted in red (or a light colour), a high grade is depicted in green (or a dark colour). The actual grade can be seen by placing the cursor on the mark.
     </p>
     <hr class="section" />
     
