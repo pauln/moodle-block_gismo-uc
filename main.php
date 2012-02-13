@@ -211,10 +211,7 @@
                         <ul>
                             <li>
                                 <a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>"><div><nobr><?php echo get_string('help_page', 'block_gismo'); ?></nobr></div></a>
-                            </li>
-                            <li>
-                                <a href="javascript:g.about();"><div><nobr><?php echo get_string('about', 'block_gismo'); ?></nobr></div></a>
-                            </li>                            
+                            </li>                          
                         </ul>
                     </li>
                 </ul>
