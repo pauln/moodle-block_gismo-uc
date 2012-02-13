@@ -101,7 +101,7 @@
     <h2 id="resources-students-overview">Resources: Students overview &nbsp; <a href="#">[Back to top]</a></h2>
     <img src="images/help/resources-students-overview.png" width="500" height="330">
     <p>
-        Details of which resources were accessed by each student and when they were accessed are provided in this chart. Student names are shown on the Y-axis, with resource names on the X-axis. A mark is shown if the student has accessed this resource, with the colour of the mark determined by the number of times he/she accessed this resource. The colours range from green to red, or light to dark, depending on the option you have chosen.
+        Details of which resources were accessed by each student and when they were accessed are provided in this chart. Student names are shown on the Y-axis, with resource names on the X-axis. A mark is shown if the student has accessed this resource, with the colour of the mark determined by the number of times he/she accessed this resource. The colours range from green to red, or light to dark, depending on the option you have chosen. The actual number can be seen by placing the cursor on the mark. This also shows the maximum activity by a student. 
     </p>
     <hr class="section" />
     
@@ -133,6 +133,16 @@
     <hr class="section" />
     
     <h2 id="activities-forums-accesses-overview">Activities: Forums, glossaries or wikis student overview &nbsp; <a href="#">[Back to top]</a></h2>
+    <img src="images/help/activities-forums-student-overview.png" width="500" height="330">
+    <p>
+        This chart is intended to visually indicate the engagement by students with forums. The Y-axis shows the students, while the X-axis shows the forums in the Learn site. Coloured marks denote the number of times a student has viewed or written posts in a forum: a lower number is depicted in red (or a light colour), a high number is depicted in green (or a dark colour). The actual number can be seen by placing the cursor on the mark. This also shows the maximum activity by a student.
+    </p>
+    <p>
+        A similar graph is available for glossaries or wikis which you have in your Learn site. This can be viewed by choosing that item from the "Activities" dropdown menu.
+    </p>
+    <hr class="section" />
+    
+    <h2 id="activities-forums-student-overview">Activities: Forums, glossaries or wikis accesses overview &nbsp; <a href="#">[Back to top]</a></h2>
     <img src="images/help/activities-forums-accesses-overview.png" width="500" height="330">
     <p>
         This graph represents the total number of accesses made by students to each forum in the course (X-axis). Each bar of the histogram represents a particular forum in the course.
@@ -142,16 +152,6 @@
     </p>
     <p>
         By clicking on the "eye icon" in the left menu, you can see the details for a specific forum. This will be displayed as in the example below.
-    </p>
-    <hr class="section" />
-    
-    <h2 id="activities-forums-student-overview">Activities: Forums, glossaries or wikis accesses overview &nbsp; <a href="#">[Back to top]</a></h2>
-    <img src="images/help/activities-forums-student-overview.png" width="500" height="330">
-    <p>
-        This chart is intended to visually indicate the engagement by students with forums. The Y-axis shows the students, while the X-axis shows the forums in the Learn site. Coloured marks denote the number of times a student has viewed or written posts in a forum: a lower number is depicted in red (or a light colour), a high number is depicted in green (or a dark colour). The actual number can be seen by placing the cursor on the mark. This also shows the maximum activity by a student.
-    </p>
-    <p>
-        A similar graph is available for glossaries or wikis which you have in your Learn site. This can be viewed by choosing that item from the "Activities" dropdown menu.
     </p>
     <hr class="section" />
     
