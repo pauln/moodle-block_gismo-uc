@@ -73,7 +73,7 @@ class block_gismo extends block_list {
 	 * has send capability for this block
 	 **/
 	function has_view_capability() { /// only teachers
-		return has_capability ( 'block/gismo:view', get_context_instance ( CONTEXT_BLOCK, $this->instance->id ) );
+		return has_capability ( 'block/gismo:view', get_context_instance ( CONTEXT_COURSE, $this->course->id ) );
 	}
     
     function check_data() {
