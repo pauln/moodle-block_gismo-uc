@@ -13,6 +13,10 @@
     
     // include moodle config file
     require_once realpath(ROOT . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "config.php");
+
+    if(!function_exists("json_encode")) {
+        require_once('json_encode.php');
+    }
     
     // query filter between pages
     $query = (isset($_REQUEST['q'])) ? addslashes($_REQUEST['q']) : '';
