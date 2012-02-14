@@ -34,7 +34,7 @@
 $block_gismo_capabilities = array(
     'block/gismo:view' => array(
         'captype' => 'write',
-        'contextlevel' => CONTEXT_BLOCK,
+        'contextlevel' => CONTEXT_COURSE,
         'legacy' => array(
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
