@@ -28,7 +28,7 @@ function json_encode($arr) {
             $json_str ="[";
             $temp = array();
             for($i=0;$i<$array_length;$i++) {
-                $temp[] = sprintf("%s", php_json_encode($arr[$i]));
+                $temp[] = sprintf("%s", json_encode($arr[$i]));
             }
             $json_str .= implode(",",$temp);
             $json_str .="]";
@@ -36,7 +36,7 @@ function json_encode($arr) {
             $json_str ="{";
             $temp = array();
             foreach($arr as $key => $value) {
-                $temp[] = sprintf("\"%s\":%s", $key, php_json_encode($value));
+                $temp[] = sprintf("\"%s\":%s", $key, json_encode($value));
             }
             $json_str .= implode(",",$temp);
             $json_str .="}";
