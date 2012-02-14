@@ -1,4 +1,9 @@
 <?php
+
+if(!function_exists("json_encode")) {
+    require_once('json_encode.php');
+}
+
 // this class is used to fetch static data
 class FetchStaticDataMoodle {
     // course data
