@@ -94,7 +94,7 @@
     }
     
     // check authorization
-    if (!has_capability('block/gismo:view', get_context_instance(CONTEXT_BLOCK, intval($srv_data->block_instance_id)))) {
+    if (!has_capability('block/gismo:view', get_context_instance(CONTEXT_COURSE, intval($srv_data->course_id)))) {
         GISMOutil::gismo_error('err_access_denied', $error_mode);
         exit;
     }
