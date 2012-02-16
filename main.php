@@ -244,6 +244,7 @@
     <?php
         if (in_array($query, array("help"))) {
             // HACK     
+            add_to_log($course->id, "gismo", "view help", "main.php", "", 0);
     ?> 
     <script>
         $(document).ready(function() {  
@@ -256,6 +257,8 @@
         });
     </script>
     <?php
+        } else {
+            add_to_log($course->id, "gismo", "view", "main.php", "", 0);
         }
     ?>  
 </html>

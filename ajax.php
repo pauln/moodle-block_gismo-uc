@@ -41,7 +41,11 @@
     $result = new stdClass();
     $result->name = "";
     $result->data = array();
-    
+
+    $subtype = (isset($_REQUEST["subtype"])) ? " ".$_REQUEST["subtype"] : "";
+    $id = (isset($_REQUEST["id"])) ? " ".$_REQUEST["id"] : "";
+    add_to_log($course->id, "gismo", "view report", "ajax.php", $query.$subtype.$id, 0);
+
     // extract data
     switch ($query) {
         case "student-accesses":
