@@ -45,6 +45,7 @@
             var srv_data = '<?php echo $srv_data_encoded; ?>';
             var static_data = new Array();
             static_data['users'] = <?php echo $gismo_static_data->users; ?>;
+            static_data['groups'] = <?php echo $gismo_static_data->groups; ?>;
             static_data['quizzes'] = <?php echo $gismo_static_data->quizzes; ?>;
             static_data['resources'] = <?php echo $gismo_static_data->resources; ?>;
             static_data['books'] = <?php echo $gismo_static_data->books; ?>;

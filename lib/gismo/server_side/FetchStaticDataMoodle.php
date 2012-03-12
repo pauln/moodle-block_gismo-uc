@@ -26,6 +26,7 @@ class FetchStaticDataMoodle {
 
     // Json fields
     protected $users;
+    protected $groups;
     protected $assignments;
     protected $quizzes;
     protected $resources;
@@ -52,6 +53,7 @@ class FetchStaticDataMoodle {
         $check &= $this->FetchInfo();
         $check &= $this->FetchAssignments();
         $check &= $this->FetchUsers();
+        $check &= $this->FetchGroups();
         $check &= $this->FetchQuizzes();
         $check &= $this->FetchResources('resource');
         $check &= $this->FetchResources('book');
@@ -135,6 +137,56 @@ class FetchStaticDataMoodle {
         }
         // return result
         return $check;
+    }
+
+    // fetch groups
+    protected function FetchGroups() {
+        global $CFG;
+        // default variables
+        $check = false;
+        $this->groups = "[]";
+        $groupings = array();
+        if ($records = get_records('groupings', 'courseid', $this->id, 'name', 'id, name')) {
+            $check = true;
+            foreach ($records as $rec) {
+                $groupings[$rec->id] = array('name'=>$rec->name, 'groups'=>array());
+                if ($groups = groups_get_all_groups($this->id, 0, $rec->id)) {
+                    uasort($groups, 'obj_name_sort_compare');
+                    foreach ($groups as $group) {
+                        $groupings[$rec->id]['groups'][$group->id] = array('name'=>format_string($group->name), 'members'=>array());
+                        if ($members = groups_get_members($group->id, $fields='u.id')) {
+                            foreach ($members as $member) {
+                                $groupings[$rec->id]['groups'][$group->id]['members'][] = $member->id;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Groups not in groupings
+        $sql = "SELECT g.id, name 
+                FROM {$CFG->prefix}groups g LEFT JOIN {$CFG->prefix}groupings_groups gg ON g.id=gg.groupid 
+                WHERE g.courseid={$this->id} AND gg.groupingid IS NULL";
+        if ($records = get_records_sql($sql)) {
+            $check = true;
+            $groupings[-1] = array('name'=>'Not in a grouping', 'groups'=>array());
+            uasort($records, 'obj_name_sort_compare');
+            foreach ($records as $rec) {
+                $groupings[-1]['groups'][$rec->id] = array('name'=>format_string($rec->name), 'members'=>array());
+                if ($members = groups_get_members($rec->id, $fields='u.id')) {
+                    foreach ($members as $member) {
+                        $groupings[-1]['groups'][$rec->id]['members'][] = $member->id;
+                    }
+                }
+            }
+        }
+
+        // save data
+        if ($check) {
+            $this->groups = json_encode($groupings);
+        }
+        // return true even if there are no groups in this course
+        return true;
     }
 
     // fetch quizzes
@@ -258,5 +310,8 @@ class FetchStaticDataMoodle {
             return false;
         }
     }
+}
+function obj_name_sort_compare($a, $b) {
+    return strnatcasecmp($a->name, $b->name);
 }
 ?>

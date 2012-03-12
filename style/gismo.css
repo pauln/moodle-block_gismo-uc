@@ -212,6 +212,15 @@ img {
     text-indent: -15px;
     width: 180px;
 }
+#lm_content .cb.cb_grey {
+    clear: left;
+    background-color: #666;
+    margin: 0;
+    padding: 4px;
+}
+#lm_content .grouping {
+    margin-bottom:8px;
+}
 #ch_header {
     background:#333;   
 }
