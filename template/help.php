@@ -14,6 +14,7 @@
                 <li><a href="#students-accesses-overview">Accesses overview</a></li>
                 <li><a href="#students-accesses-overview-resources">Accesses overview of resources, books, forums, glossaries or wikis</a></li>
                 <li><a href="#student-details-resources">Student details on resources, books, forums, glossaries or wikis</a></li>
+                <li><a href="#groups">Groups and Groupings of students</a></li>
             </ul>
         </li>
         <li><a href="#resources-students-overview">Resources</a>
@@ -36,21 +37,26 @@
     </ul>
     
     <h2 id="overview">Overview &nbsp; <a href="#">[Back to top]</a></h2>
-    <img src="images/help/overview.png" width="500" height="330">
+    <img src="images/help/overview.png?20120323" width="500" height="330">
     <p>
-        There are four areas which make up the LearnTrak user interface:
+        There are five areas which make up the LearnTrak user interface:
     </p>
     <ul>
-        <li>The dropdown menu navigation bar</li>
+        <li>The dropdown menu navigation bar.</li>
+        <li>The Item Type icon bar: Item types chosen from here can include students, groups, resources, books, forums, glossaries, wikis, quizzes and assignments.</li>
         <li>The List Panel: A list of students, resources, or activities in your Learn course will be shown in this panel. From each list the instructor can select or deselect data to visualize, for items chosen using the tick-boxes.</li>
         <li>The Graph Panel: Visualisations are shown in this panel.</li>
         <li>Time Slider: Using this slider the instructor can restrict the graph to display data from a specific range of dates.</li>
     </ul>
     <p>
-        By clicking on items from the dropdown menus under the category headings along the menu bar at the top, graphical representations can be viewed with a focus on the student, the resources or the activities within a Learn site.
+        You can target the student, resource or activity you wish to focus on, from the list panel before you chose the display type. This can be done by clicking on the item type from the icons in the Item Type icon bar, and selecting or deselecting using the instructions below. The system then only looks for data from those items and will display your graph much more quickly.
+    </p>
+    <img src="images/help/lists-help.png" width="306" height="275">
+    <p>
+        By clicking on the display options from the dropdown menus under the category headings along the menu bar at the top, graphical representations can be viewed with a focus on the student, the resources or the activities within a Learn site.
     </p>
     <p>
-        The list of items viewed can be made more specific by using the tick boxes in the list panel. The dates of the information displayed can be made more specific by using the time slider along the bottom of the screen, which can be moved from either end.
+        The dates of the information displayed can be made more specific by using the time slider along the bottom of the screen, which can be moved from either end.
     </p>
     <hr class="category" />
 
@@ -96,6 +102,23 @@
     <p>
         This graph shows an overview of a particular student's accesses to the course's resources. Dates are represented on the X-axis; resources are represented on the Y-axis.
     </p>
+    <hr class="section" />
+    
+    <h2 id="groups">Groups and Groupings of students &nbsp; <a href="#">[Back to top]</a></h2>
+    <p>
+        Any information displayed for students can also be displayed for students in groups.
+    </p>
+    <p>
+        By clicking on the 'Groups' icon <img src="images/help/groups-icon.png" width="23" height="23" /> you can see a list of all the groups and groupings in your course - both those created by teachers, and those groups created automatically.
+    </p>
+    <img src="images/help/display-groupings.png" width="500" height="330">
+    <p>
+        Groups display within their groupings, and those groups which are not in a grouping display beneath them.
+    </p>
+    <p>
+        To see the data for one group of students, select that group by un-ticking all boxes, and ticking just the box for that group.
+    </p>
+    <img src="images/help/chosen-group.png" width="500" height="330">
     <hr class="category" />
     
     <h2 id="resources-students-overview">Resources: Students overview &nbsp; <a href="#">[Back to top]</a></h2>
