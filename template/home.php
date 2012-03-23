@@ -32,7 +32,7 @@
             </div>
             <div id="welcome_page">
                 <h1 align="center">Welcome to LearnTrak</h1>
-                <table id="charts_list" cellspacing="0" cellpadding="5" align="center" width="800">
+                <table id="charts_list" cellspacing="0" cellpadding="5" align="center" width="840">
                     <tr>
                         <td class="home-image"><img width="200" height="100" src="images/home/students-accesses-overview_thumb.png" /></td>
                         <td>LearnTrak is a graphical interactive student monitoring and tracking system tool that extracts tracking data from this Learn course, and generates useful graphical representations that can be explored by course instructors to examine various aspects of student engagement. The LearnTrak block is only visible to the instructors of the course.</td>
@@ -44,7 +44,41 @@
                         <td class="home-image"><img width="200" height="100" src="images/home/resources-access-overview_thumb.png" /></td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="home-image"><img width="200" height="100" src="images/home/resources-students-overview_thumb.png" /></td>
+                        <td></td>
+                        <td class="help" style="width:auto;">
+                            <h2>LearnTrak Help Topics</h2>
+                            <ul class="contents">
+                                <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#overview">Overview</a></li>
+                                <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#options">Options</a></li>
+                                <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#students-accesses">Students</a>
+                                    <ul>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#students-accesses">Accesses by students</a></li>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#students-accesses-overview">Accesses overview</a></li>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#students-accesses-overview-resources">Accesses overview of resources, books, forums, glossaries or wikis</a></li>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#student-details-resources">Student details on resources, books, forums, glossaries or wikis</a></li>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#groups">Groups and Groupings of students</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#resources-students-overview">Resources</a>
+                                    <ul>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#resources-students-overview">Students overview</a></li>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#resources-accesses-overview">Accesses overview of resources and books</a></li>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#resources-details-students">Resource details on students</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#activities-assignments-quizzes">Activities</a>
+                                    <ul>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#activities-assignments-quizzes">Assignments/Quizzes overview</a></li>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#activities-forums-accesses-overview">Forums, glossaries or wikis student overview</a></li>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#activities-forums-student-overview">Forums, glossaries or wikis accesses overview</a></li>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#activities-forums-details-students">Forums, glossaries or wikis details on students</a></li>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#activities-summary-student-overview">Summary students overview</a></li>
+                                        <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#activities-summary-accesses-overview">Summary accesses overview</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </td>
+                        <td></td>
                     </tr>
                 </table>
             </div>           

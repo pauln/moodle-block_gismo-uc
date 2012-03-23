@@ -30,7 +30,7 @@
         ?>
         <!--[if IE]><script language="javascript" type="text/javascript" src="lib/third_parties/client_side/jqplot.0.9.7/excanvas.js"></script><![endif]-->
         <!-- client side libraries END -->
-        <link rel="stylesheet" href="style/gismo.css" type="text/css" media="screen" charset="utf-8" />
+        <link rel="stylesheet" href="style/gismo.css?20120323" type="text/css" media="screen" charset="utf-8" />
         <link rel="stylesheet" href="lib/third_parties/client_side/jquery-ui-1.8.6/css/ui-darkness/jquery-ui-1.8.6.custom.css" type="text/css" media="screen" charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="lib/third_parties/client_side/jqplot.0.9.7/jquery.jqplot.min.css" />
         <?php
@@ -84,7 +84,7 @@
     </head>
     <body>
         <div id="dialog"></div>
-        <div id="header">
+        <div id="header"<?php if (in_array($query, array("help"))) { ?> class="help-header"<?php } ?>>
             <form class="hidden" id="print_form" name="print_form" action="print.php" target="_blank" method="post">
                 <textarea class="hidden" id="datatodisplay" name="datatodisplay"></textarea>
                 <input type="hidden" id="mode" name="mode" />

@@ -349,19 +349,24 @@ img {
     width:800px;
     margin:0 auto;
 }
+.help-header {
+    position:fixed;
+}
 .help h1 {
     margin-top:0px;
 }
 .help h2 {
     margin-bottom:5px;
+    padding-top:25px;
 }
 .help hr {
     border:1px solid #000;
+    margin-bottom:-20px;
 }
 .help hr.category {
     width:95%;
     margin-top:40px;
-    margin-bottom:40px;
+    margin-bottom:15px;
 }
 .help hr.section {
     width:60%;
@@ -379,6 +384,7 @@ img {
 }
 .help ul.contents {
     margin-bottom:25px;
+    margin-left:2px;
 }
 .help ul.contents, .help ul.contents ul {
     list-style: none;

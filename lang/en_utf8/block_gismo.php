@@ -11,7 +11,7 @@
     $string['exit'] = 'Exit';
 	$string['help'] = 'Help';
 	$string['home'] = 'LearnTrak home';
-    $string['close'] = 'Close';
+    $string['close'] = 'Return to LearnTrak';
 	
 	// Students
 	$string['students'] = 'Students';    
