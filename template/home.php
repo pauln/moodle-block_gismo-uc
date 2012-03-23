@@ -39,15 +39,15 @@
                         <td class="home-image"><img width="200" height="100" src="images/home/activities-assignments-quizzes_thumb.png" /></td>
                     </tr>
                     <tr>
-                        <td class="home-image"><img width="200" height="100" src="images/home/students-accesses_thumb.png" /></td>
+                        <td></td>
                         <td><p style="margin-top:0;">As a teacher in your Learn course you may wonder what use your students are making of the site: Are they regularly accessing the course? Are they viewing or downloading course materials? Are they participating in activities? Are there students who are over-achieving or under-achieving? This is where LearnTrak can help you.</p><p>LearnTrak generates graphical representations of activity within Learn courses. There are three main categories of visualizations: Students, Resources and Activities.</p></td>
-                        <td class="home-image"><img width="200" height="100" src="images/home/resources-access-overview_thumb.png" /></td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td class="home-image" valign="bottom"><img width="200" height="100" src="images/home/students-accesses_thumb.png" /></td>
                         <td class="help" style="width:auto;">
                             <h2>LearnTrak Help Topics</h2>
-                            <ul class="contents">
+                            <ul class="contents" style="margin-bottom:0;">
                                 <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#overview">Overview</a></li>
                                 <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#options">Options</a></li>
                                 <li><a href="?q=help&srv_data=<?php echo $srv_data_encoded;?>#students-accesses">Students</a>
@@ -78,7 +78,7 @@
                                 </li>
                             </ul>
                         </td>
-                        <td></td>
+                        <td class="home-image" valign="bottom"><img width="200" height="100" src="images/home/resources-access-overview_thumb.png" /></td>
                     </tr>
                 </table>
             </div>           
