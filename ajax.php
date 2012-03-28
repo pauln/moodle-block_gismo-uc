@@ -328,5 +328,7 @@
     }
     
     // echo json encoded result
-    echo json_encode($result);
+    $json_result = json_encode($result);
+    $json_result = preg_replace('/"(\d+)"([^=:])/', "\\1\\2", $json_result);
+    echo $json_result;
 ?>

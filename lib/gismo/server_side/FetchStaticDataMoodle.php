@@ -99,7 +99,7 @@ class FetchStaticDataMoodle {
             $check = true;
             if (is_array($assignments) AND count($assignments) > 0) {
                 foreach ($assignments as $assignment) {
-                    $json_assignments[] = array("id" => $assignment->id,
+                    $json_assignments[] = array("id" => intval($assignment->id),
                                                 "name" => $assignment->name,
                                                 "timeavailable" => $assignment->timeavailable,
                                                 "gradeOver" => $assignment->grade,
@@ -203,7 +203,7 @@ class FetchStaticDataMoodle {
             $check = true;
             if (is_array($quizzes) AND count($quizzes) > 0) {
                 foreach ($quizzes as $quiz) {
-                    $json_quizzes[] = array("id" => $quiz->id,
+                    $json_quizzes[] = array("id" => intval($quiz->id),
                                             "name" => $quiz->name,
                                             "timeopen_qui" => $quiz->timeopen,
                                             "timeclose_qui" => $quiz->timeclose,
@@ -232,7 +232,7 @@ class FetchStaticDataMoodle {
             $check = true;
             if (is_array($resources) AND count($resources) > 0) {
                 foreach ($resources as $resource) {
-                    $json_resources[] = array("id" => $resource->coursemodule,
+                    $json_resources[] = array("id" => intval($resource->coursemodule),
                                               "name" => $resource->name,
                                               "visible" => $resource->visible,
                                               "type" => $type_plural);
