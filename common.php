@@ -29,25 +29,26 @@
                                    "third_parties"  => array());     
     
     // client side: please note that '.js' extension will be automatically added   
+    $jqPlotVer = "1.0.0b2";
     $client_side_libraries = array("gismo"          => array("gismo", "top_menu", "left_menu", "time_line", "gismo_util"),
                                    "third_parties"  => array("jquery/jquery-1.7.1.min",
                                                              "jquery-ui-1.8.6/js/jquery-ui-1.8.6.custom.min",
-                                                             "jqplot.0.9.7/jquery.jqplot.min",
-                                                             "jqplot.0.9.7/plugins/jqplot.barRenderer.min",
-                                                             "jqplot.0.9.7/plugins/jqplot.canvasAxisLabelRenderer.min",
-                                                             "jqplot.0.9.7/plugins/jqplot.canvasAxisTickRenderer.min",
-                                                             "jqplot.0.9.7/plugins/jqplot.canvasTextRenderer.min",
-                                                             "jqplot.0.9.7/plugins/jqplot.categoryAxisRenderer.min",
+                                                             "jqplot.$jqPlotVer/jquery.jqplot.min",
+                                                             "jqplot.$jqPlotVer/plugins/jqplot.barRenderer.min",
+                                                             "jqplot.$jqPlotVer/plugins/jqplot.canvasAxisLabelRenderer.min",
+                                                             "jqplot.$jqPlotVer/plugins/jqplot.canvasAxisTickRenderer.min",
+                                                             "jqplot.$jqPlotVer/plugins/jqplot.canvasTextRenderer.min",
+                                                             "jqplot.$jqPlotVer/plugins/jqplot.categoryAxisRenderer.min",
                                                              // "jqplot.0.9.7/plugins/jqplot.cursor.min",
-                                                             "jqplot.0.9.7/plugins/jqplot.dateAxisRenderer.min",
+                                                             "jqplot.$jqPlotVer/plugins/jqplot.dateAxisRenderer.min",
                                                              // "jqplot.0.9.7/plugins/jqplot.dragable.min",
-                                                             "jqplot.0.9.7/plugins/jqplot.highlighter.min",
+                                                             "jqplot.$jqPlotVer/plugins/jqplot.highlighter.min",
                                                              // "jqplot.0.9.7/plugins/jqplot.logAxisRenderer.min",
                                                              // "jqplot.0.9.7/plugins/jqplot.mekkoAxisRenderer.min",
                                                              // "jqplot.0.9.7/plugins/jqplot.mekkoRenderer.min",
                                                              // "jqplot.0.9.7/plugins/jqplot.ohlcRenderer.min",
                                                              // "jqplot.0.9.7/plugins/jqplot.pieRenderer.min",
-                                                             "jqplot.0.9.7/plugins/jqplot.pointLabels.min"
+                                                             "jqplot.$jqPlotVer/plugins/jqplot.pointLabels.min"
                                                              // "jqplot.0.9.7/plugins/jqplot.trendline.min"
                                                              ));
                                                              
