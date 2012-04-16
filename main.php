@@ -19,8 +19,13 @@
                     foreach ($client_side_libs as $client_side_lib) {
                         $lib_full_path = LIB_DIR . $key . DIRECTORY_SEPARATOR . "client_side" . DIRECTORY_SEPARATOR .  $client_side_lib . ".js";
                         if (is_file($lib_full_path) AND is_readable($lib_full_path)) {
+                            if ($client_side_lib == 'gismo') {
+                                $qs = "?20120417";
+                            } else {
+                                $qs = "";
+                            }
         ?>
-        <script type="text/javascript" src="lib/<?php echo $key . "/client_side/" . $client_side_lib; ?>.js"></script>
+        <script type="text/javascript" src="lib/<?php echo $key . "/client_side/" . $client_side_lib . ".js" . $qs; ?>"></script>
         <?php                         
                         }    
                     }
