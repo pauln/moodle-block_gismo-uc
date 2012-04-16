@@ -62,6 +62,13 @@
             
             // gismo instance
             var g = new gismo(config, srv_data, static_data, course_start_time, current_time);
+
+            // If a chart has been generated, destroy it on unload to release memory
+            window.onunload =  function() {
+                if(g.current_analysis.plot != null) {
+                    g.current_analysis.plot.destroy();
+                }
+            }
             
             // initialize application
             $(document).ready(function() {
