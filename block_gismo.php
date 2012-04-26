@@ -99,7 +99,7 @@ class block_gismo extends block_list {
         // trace start
         mtrace("GISMO - cron (start)!");
         
-        $gdm = new GISMOdata_manager(false);
+        $gdm = new GISMOdata_manager(true);
         
         // purge
         $purge_check = $gdm->purge_data();
