@@ -1,0 +1,17 @@
+Release 2.0.2 (2010-11-30)
+- Update: jquery 1.4.4
+- Update: jquery-ui 1.8.6
+- Fix: assignments without grade are displayed correctly
+- New: option to show/hide hidden items (resources / activities)
+
+Release 2.0.1 (2010-09-03)
+- Update: jquery 1.4.2
+- Update: jquery-ui 1.8.4
+- New: remove unsupported analysis from the menu
+- New: display message while processing data to build a new chart 
+- Fix: exporter memory bug
+- Fix: time line start date and end date are now set according to logs 
+- Fix: removed hours & minutes from timeline labels
+
+Release 2.0.0 (2010-05-11)
+- First stable release
