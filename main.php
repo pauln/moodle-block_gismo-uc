@@ -20,7 +20,7 @@
                         $lib_full_path = LIB_DIR . $key . DIRECTORY_SEPARATOR . "client_side" . DIRECTORY_SEPARATOR .  $client_side_lib . ".js";
                         if (is_file($lib_full_path) AND is_readable($lib_full_path)) {
                             if ($client_side_lib == 'gismo') {
-                                $qs = "?20120423";
+                                $qs = "?20120608";
                             } else {
                                 $qs = "";
                             }
